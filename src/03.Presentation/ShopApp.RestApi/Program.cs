@@ -1,6 +1,11 @@
 
 using Microsoft.EntityFrameworkCore;
+using OnlineShop.Services.Contracts;
 using ShopApp.Persistanse.EF;
+using ShopApp.Persistanse.EF.Categories;
+using ShopApp.Services.Categories;
+using ShopApp.Services.Categories.Contracts;
+using Templete.Persistanse.EF;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -11,6 +16,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<UnitOfWork, EFUnitOfWork>();
+
+builder.Services.AddScoped<CategoryRepository, EFCategoryRepository>();
+builder.Services.AddScoped<CaregoryServices, CategoryAppServices>();
 
 
 builder.Services.AddDbContext<EFDataContext>(options =>
