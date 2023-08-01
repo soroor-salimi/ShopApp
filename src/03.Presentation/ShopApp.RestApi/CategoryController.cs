@@ -19,11 +19,22 @@ namespace OnllineShop.RestApi
         {
             _services.Add(dto);
         }
+
         [HttpGet]
         public List<GetAllCategoryDto> GetAll()
         {
             return _services.GetAll();
         }
 
+        [HttpPut("{id}")]
+        public void UpdateName([FromRoute] int id, UpdateCategoryNameDto dto)
+        {
+            _services.UpdateNameCategory(id, dto);
+        }
+        [HttpDelete("{id}")]
+        public void DeletedCategory([FromRoute] int id)
+        {
+            _services.DeleteCategory(id);
+        }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineShop.TestTools.Categories
+namespace ShopApp.TestTools.Categories
 {
     public static class CategoryFactory
     {

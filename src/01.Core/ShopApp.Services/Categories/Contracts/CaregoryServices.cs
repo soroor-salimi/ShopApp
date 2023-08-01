@@ -11,6 +11,7 @@ namespace ShopApp.Services.Categories.Contracts
     {
         void Add(AddedCategoryDto dto);
         List<GetAllCategoryDto> GetAll();
-
+        void UpdateNameCategory(int id, UpdateCategoryNameDto dto);
+        void DeleteCategory(int id);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-using OnlineShop.TestTools.Categories;
 using ShopApp.Services.Categories.Exceptions;
+using ShopApp.TestTools.Categories;
 using ShopApp.TestTools.infrastructure.DataBaseConfig;
 using ShopApp.TestTools.infrastructure.DataBaseConfig.Integration;
 using System;

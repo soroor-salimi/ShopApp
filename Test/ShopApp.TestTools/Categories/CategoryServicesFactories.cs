@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Templete.Persistanse.EF;
 
-namespace OnlineShop.TestTools.Categories
+namespace ShopApp.TestTools.Categories
 {
     public static class CategoryServicesFactories
     {

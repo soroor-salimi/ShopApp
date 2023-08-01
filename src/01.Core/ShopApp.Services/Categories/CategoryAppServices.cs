@@ -27,6 +27,7 @@ namespace ShopApp.Services.Categories
             {
                 throw new CategoryNameIsExistException();
             }
+
             var categoryDto = new Category()
             {
                 Name = dto.Name,
@@ -34,9 +35,42 @@ namespace ShopApp.Services.Categories
             _repository.Add(categoryDto);
             _unitOfWork.Complete();
         }
+
+        public void DeleteCategory(int id)
+        {
+            var category = _repository.FindById(id);
+            if(category == null)
+            {
+                throw new IdIsNotFoundException();
+            }
+            _repository.DeletedCategory(category);
+            _unitOfWork.Complete();
+        }
+
         public List<GetAllCategoryDto> GetAll()
         {
             return _repository.GetAll();
+        }
+
+
+        public void UpdateNameCategory(int id, UpdateCategoryNameDto dto)
+        {
+            var category = _repository.FindById(id);
+            if (category == null)
+            {
+                throw new IdIsNotFoundException();
+            };
+
+            bool isdDuplicate = _repository.IsDublicateName(id, dto.Name);
+            if (isdDuplicate)
+            {
+                throw new CategoryNameIsExistException();
+            }
+
+            category.Name = dto.Name;
+
+            _repository.UpdateName(category);
+            _unitOfWork.Complete();
         }
     }
 }

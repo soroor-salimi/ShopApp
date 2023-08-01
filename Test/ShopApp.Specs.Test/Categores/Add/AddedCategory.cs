@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
-using OnlineShop.TestTools.Categories;
 using ShopApp.Entities;
 using ShopApp.Services.Categories.Contracts.Dto;
+using ShopApp.TestTools.Categories;
 using ShopApp.TestTools.infrastructure.DataBaseConfig.Integration;
 using System;
 using System.Collections.Generic;

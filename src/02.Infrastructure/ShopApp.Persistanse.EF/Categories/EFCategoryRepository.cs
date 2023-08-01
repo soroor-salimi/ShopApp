@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.Persistanse.EF.Categories
 {
-    public class EFCategoryRepository: CategoryRepository
+    public class EFCategoryRepository : CategoryRepository
     {
         private DbSet<Category> _categories;
         public EFCategoryRepository(EFDataContext context)
@@ -21,6 +21,12 @@ namespace ShopApp.Persistanse.EF.Categories
         {
             _categories.Add(category);
         }
+
+        public void DeletedCategory(Category category)
+        {
+            _categories.Remove(category);
+        }
+
         public bool DublicateName(string name)
         {
             return _categories.Any(_ => _.Name == name);
@@ -34,11 +40,21 @@ namespace ShopApp.Persistanse.EF.Categories
         {
             var result = _categories.Select(_ => new GetAllCategoryDto()
             {
-               Name=_.Name,
-               Id=_.Id
+                Name = _.Name,
+                Id = _.Id
             });
 
             return result.ToList();
+        }
+
+        public bool IsDublicateName(int id, string name)
+        {
+            return _categories.Any(_ => _.Name == name &&_.Id !=id);
+        }
+
+        public void UpdateName(Category category)
+        {
+            _categories.Update(category);
         }
     }
 }
