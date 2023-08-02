@@ -17,5 +17,7 @@ namespace ShopApp.Services.Categories.Contracts
         void UpdateName(Category category);
         bool IsDublicateName(int id,string name);
         void DeletedCategory(Category category);
+        GetCategoryDto? GetCategoryWithProduct(int id);
+        bool HasProduct(int categoryId);
     }
 }

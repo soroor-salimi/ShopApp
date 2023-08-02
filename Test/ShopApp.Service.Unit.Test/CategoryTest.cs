@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace CMS.Service.Unit.Test
+namespace ShopApp.Service.Unit.Test
 {
     public class CategoryTest : BusinessUnitTest
     {
@@ -45,8 +45,8 @@ namespace CMS.Service.Unit.Test
         {
             var category = CategoryFactory.Generate("بهداشتی");
             DbContext.Save(category);
-
-            var result = CategoryServicesFactories.Create(SetupContext).GetAll();
+            var sut = CategoryServicesFactories.Create(SetupContext);
+            var result =sut.GetAll();
 
             result.Should().HaveCount(1);
             result.First().Id.Should().Be(category.Id);
@@ -54,6 +54,27 @@ namespace CMS.Service.Unit.Test
 
         }
 
+        //[Fact]
+        //public void Get_get_all_product_with_one_category_properly()
+        //{
+        //    var category = CategoryFactory.Generate("بهداشتی");
+        //    DbContext.Save(category);
+        //    var product = new Product()
+        //    {
+        //        Title = "شامپو",
+        //        Inventory=0,
+        //        MinimumInventory=10,
+        //        CategoryId = category.Id,
+        //    };
+        //    DbContext.Save(product);
+
+
+        //    var sut= CategoryServicesFactories.Create(SetupContext);
+        //    var result =sut.GetAllproductWithcategoryId(category.Id);
+
+        //   result.Should().;
+           
+        //}
         [Fact]
         public void update_update_name_category_properly()
         {
@@ -81,34 +102,33 @@ namespace CMS.Service.Unit.Test
             var expected = () => sut.UpdateNameCategory(invalidid, dto);
             expected.Should().ThrowExactly<IdIsNotFoundException>();
         }
-        //[Fact]
-        //public void update_update_name_with_diffrent_categoryId_properly()
-        //{
-        //    var sut = CategoryServicesFactories.Create(SetupContext);
-        //    var category = CategoryFactory.Generate("بهداشتی");
-        //    DbContext.Save(category);
-        //    var category1 = CategoryFactory.Generate("آرایشی _بهداشتی");
-        //    DbContext.Save(category1);
-
-        //    var dto = UpdateCategoryNameDtoFactory.Generate("آرایشی_بهداشتی");
-
-        //    var expected = () => CategoryServicesFactories
-        //    .Create(SetupContext).UpdateNameCategory(category.Id,dto);
-
-        //    expected.Should().ThrowExactly<CategoryNameIsExistException>();
-
-        //}
         [Fact]
-        public void Delete_deleted_product_properly()
+        public void update_failed_to_Edit_category_name_with_one_categoryId_properly()
         {
             var category = CategoryFactory.Generate("بهداشتی");
             DbContext.Save(category);
-       
+            var category1 = CategoryFactory.Generate("آرایشی _بهداشتی");
+            DbContext.Save(category1);
+
+            var dto = UpdateCategoryNameDtoFactory.Generate("بهداشتی");
+
+            var sut = CategoryServicesFactories.Create(SetupContext);
+            var expected = () => sut.UpdateNameCategory(category1.Id, dto);
+
+            expected.Should().ThrowExactly<CategoryNameIsExistException>();
+
+        }
+        [Fact]
+        public void Delete_deleted_category_properly()
+        {
+            var category = CategoryFactory.Generate("بهداشتی");
+            DbContext.Save(category);
+
             var sut = CategoryServicesFactories.Create(SetupContext);
 
             sut.DeleteCategory(category.Id);
 
-            var expected = ReadContext.Set<Product>().Any();
+            var expected = ReadContext.Set<Category>().Any();
         }
         [Fact]
         public void Deleted_invalidId_category_properly()

@@ -2,7 +2,7 @@
 using ShopApp.Services.Categories.Contracts;
 using ShopApp.Services.Categories.Contracts.Dto;
 
-namespace OnllineShop.RestApi
+namespace ShopApp.RestApi
 {
     [ApiController]
     [Route("categories")]
@@ -24,6 +24,11 @@ namespace OnllineShop.RestApi
         public List<GetAllCategoryDto> GetAll()
         {
             return _services.GetAll();
+        } 
+        [HttpGet("{id}")]
+        public GetCategoryDto GetCategoryWithProducts(int id)
+        {
+            return _services.GetAllproductWithcategoryId(id);
         }
 
         [HttpPut("{id}")]

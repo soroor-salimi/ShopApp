@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tempelte.Specs.Tests;
 
 namespace ShopApp.Specs.Test.Categores.Add
 {

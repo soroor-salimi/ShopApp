@@ -1,11 +1,13 @@
 
 using Microsoft.EntityFrameworkCore;
-using OnlineShop.Services.Contracts;
 using ShopApp.Persistanse.EF;
 using ShopApp.Persistanse.EF.Categories;
+using ShopApp.Persistanse.EF.Products;
 using ShopApp.Services.Categories;
 using ShopApp.Services.Categories.Contracts;
-using Templete.Persistanse.EF;
+using ShopApp.Services.Contracts;
+using ShopApp.Services.Products;
+using ShopApp.Services.Products.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -20,6 +22,9 @@ builder.Services.AddScoped<UnitOfWork, EFUnitOfWork>();
 
 builder.Services.AddScoped<CategoryRepository, EFCategoryRepository>();
 builder.Services.AddScoped<CaregoryServices, CategoryAppServices>();
+
+builder.Services.AddScoped<ProductRepository, EFProductRepository>();
+builder.Services.AddScoped<ProductServices, ProductAppServices>();
 
 
 builder.Services.AddDbContext<EFDataContext>(options =>

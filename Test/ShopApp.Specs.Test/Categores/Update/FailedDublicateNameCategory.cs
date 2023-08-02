@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using FluentAssertions;
-using Tempelte.Specs.Tests;
 using ShopApp.TestTools.infrastructure.DataBaseConfig.Integration;
 using ShopApp.TestTools.infrastructure.DataBaseConfig;
 using ShopApp.Services.Categories.Exceptions;
 using ShopApp.Entities;
 using ShopApp.TestTools.Categories;
+using ShopApp.Specs.Test;
 
-namespace OnlineShop.Specs.Tests.Categories.Add
+namespace ShopApp.Specs.Test.Categores.Update
 {
     [Scenario("رخ دادن خطا هنگام ویرایش دسته بندی تکراری")]
     public class DublicateNameCategory : BusinessIntegrationTest
@@ -37,7 +37,7 @@ namespace OnlineShop.Specs.Tests.Categories.Add
             var dto = UpdateCategoryNameDtoFactory.Generate("بهداشتی");
 
             _expected = () => CategoryServicesFactories.Create(SetupContext)
-            .UpdateNameCategory(_category1.Id,dto);
+            .UpdateNameCategory(_category1.Id, dto);
 
         }
 

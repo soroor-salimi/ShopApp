@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using ShopApp.Entities;
 using ShopApp.Services.Categories.Contracts.Dto;
+using ShopApp.Specs.Test;
 using ShopApp.TestTools.Categories;
 using ShopApp.TestTools.infrastructure.DataBaseConfig;
 using ShopApp.TestTools.infrastructure.DataBaseConfig.Integration;
@@ -9,10 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tempelte.Specs.Tests;
 using Xunit;
 
-namespace OnlineShop.Specs.Tests.Categories.Update
+namespace ShopApp.Specs.Test.Categores.Update
 {
     [Scenario("ویرایش یک دسته بندی ")]
     public class UpdateCategoryName : BusinessIntegrationTest

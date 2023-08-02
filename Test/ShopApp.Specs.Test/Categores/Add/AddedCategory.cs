@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using ShopApp.Entities;
 using ShopApp.Services.Categories.Contracts.Dto;
+using ShopApp.Specs.Test;
 using ShopApp.TestTools.Categories;
 using ShopApp.TestTools.infrastructure.DataBaseConfig.Integration;
 using System;
@@ -8,10 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tempelte.Specs.Tests;
 using Xunit;
 
-namespace OnlineShop.Specs.Tests.Categories.Add
+namespace ShopApp.Specs.Test.Categores.Add
 {
     [Scenario("میخواهم یک دسته بندی را ثبت کنم")]
     public class AddCatgory : BusinessIntegrationTest

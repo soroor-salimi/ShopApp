@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Tempelte.Specs.Tests
+namespace ShopApp.Specs.Test
 {
     public static class Runner
     {

@@ -1,4 +1,5 @@
 ﻿using ShopApp.Services.Categories.Contracts.Dto;
+using ShopApp.Services.Products.Contracts.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace ShopApp.Services.Categories.Contracts
         List<GetAllCategoryDto> GetAll();
         void UpdateNameCategory(int id, UpdateCategoryNameDto dto);
         void DeleteCategory(int id);
+        GetCategoryDto GetAllproductWithcategoryId(int id);
     }
 }

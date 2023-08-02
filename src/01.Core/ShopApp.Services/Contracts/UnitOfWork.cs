@@ -1,4 +1,4 @@
-﻿namespace OnlineShop.Services.Contracts;
+﻿namespace ShopApp.Services.Contracts;
 
 public interface UnitOfWork
 {

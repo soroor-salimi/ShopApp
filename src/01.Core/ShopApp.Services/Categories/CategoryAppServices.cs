@@ -1,8 +1,9 @@
-﻿using OnlineShop.Services.Contracts;
-using ShopApp.Entities;
+﻿using ShopApp.Entities;
 using ShopApp.Services.Categories.Contracts;
 using ShopApp.Services.Categories.Contracts.Dto;
 using ShopApp.Services.Categories.Exceptions;
+using ShopApp.Services.Contracts;
+using ShopApp.Services.Products.Contracts.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +44,12 @@ namespace ShopApp.Services.Categories
             {
                 throw new IdIsNotFoundException();
             }
+            
+            var hasProduct = _repository.HasProduct(category.Id);
+            if (hasProduct)
+            {
+                throw new CategoryHasProductException();
+            }
             _repository.DeletedCategory(category);
             _unitOfWork.Complete();
         }
@@ -52,6 +59,10 @@ namespace ShopApp.Services.Categories
             return _repository.GetAll();
         }
 
+        public GetCategoryDto GetAllproductWithcategoryId(int id)
+        {
+            return _repository.GetCategoryWithProduct(id);
+        }
 
         public void UpdateNameCategory(int id, UpdateCategoryNameDto dto)
         {

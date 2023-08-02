@@ -1,7 +1,6 @@
-﻿using OnlineShop.Services.Contracts;
-using ShopApp.Persistanse.EF;
+﻿using ShopApp.Services.Contracts;
 
-namespace Templete.Persistanse.EF;
+namespace ShopApp.Persistanse.EF;
 
 public class EFUnitOfWork : UnitOfWork
 {
