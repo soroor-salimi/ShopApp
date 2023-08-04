@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ShopApp.Entities;
 using ShopApp.Services.Products.Contracts.Dto;
 
 namespace ShopApp.TestTools.Products
@@ -15,7 +16,8 @@ namespace ShopApp.TestTools.Products
                 Title = "شیر",
                 CategoryId = 0,
                 Inventory = 0,
-                MinimumInventory = 20
+                MinimumInventory = 20,
+                StatusType = StatusType.unavailable,
             };
 
         }
@@ -38,6 +40,11 @@ namespace ShopApp.TestTools.Products
         public AddProductDtoBuilder WithMinimumInventory(int minimumInventory)
         {
             _product.MinimumInventory = minimumInventory;
+            return this;
+        }
+        public AddProductDtoBuilder WithStatusType(StatusType statusType)
+        {
+            _product.StatusType = statusType;
             return this;
         }
         public AddProductDto Build()

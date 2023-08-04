@@ -18,6 +18,7 @@ namespace ShopApp.Entities
         public string Title { get; set; }
         public int MinimumInventory { get; set; }
         public int Inventory { get; set; }
+        public StatusType statusType { get; set; }
 
         public HashSet<Sell> Sells { get; set; }
         public HashSet<ProductArrival> productArrivals { get; set; }

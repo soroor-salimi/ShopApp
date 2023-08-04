@@ -36,5 +36,9 @@ namespace ShopApp.Persistanse.EF.Products
             return _products.Any(_ => _.Title == title);
         }
 
+        public void Update(Product product)
+        {
+            _products.Update(product);
+        }
     }
 }

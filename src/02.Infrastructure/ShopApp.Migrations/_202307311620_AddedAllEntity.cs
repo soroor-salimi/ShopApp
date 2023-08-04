@@ -22,6 +22,7 @@ namespace ShopApp.Migrations
          .WithColumn("Title").AsString(255).NotNullable()
          .WithColumn("MinimumInventory").AsInt32().NotNullable()
          .WithColumn("Inventory").AsInt32().NotNullable()
+         .WithColumn("statusType").AsInt32().NotNullable()
 
          .WithColumn("CategoryId").AsInt32().NotNullable()
          .ForeignKey("Fk_Products_Categories", "Categories", "Id");

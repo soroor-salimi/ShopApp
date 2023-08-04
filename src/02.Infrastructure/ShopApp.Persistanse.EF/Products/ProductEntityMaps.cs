@@ -20,6 +20,7 @@ namespace ShopApp.Persistanse.EF.Products
             entity.Property(_ => _.Title).IsRequired().HasMaxLength(255);
             entity.Property(_ => _.MinimumInventory).IsRequired();
             entity.Property(_ => _.Inventory).IsRequired();
+            entity.Property(_ => _.statusType).IsRequired();
 
             entity.Property(_ => _.CategoryId).IsRequired();
             entity.HasOne(_ => _.Category)

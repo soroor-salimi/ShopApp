@@ -122,7 +122,11 @@ namespace ShopApp.Service.Unit.Test
             var expected = () => sut.DeleteProduct(invalidId);
             expected.Should().ThrowExactly<ProductIsNotFoundException>();
         }
+        [Fact]
+        public void Update_update_inventory_product_properly()
+        {
 
+        }
     }
     
 }

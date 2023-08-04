@@ -61,5 +61,17 @@ namespace ShopApp.Services.Products
             _repository.DeletedProduct(product);
             _unitOfWork.Complete();
         }
+
+        public void Update(int productId, UpdateProductDto productDto)
+        {
+            var product=_repository.FindById(productId);
+            if (product==null)
+            {
+                throw new ProductIsNotFoundException();
+            }
+            product.Inventory=productDto.Inventory;
+            _repository.Update(product);
+            _unitOfWork.Complete();
+        }
     }
 }
