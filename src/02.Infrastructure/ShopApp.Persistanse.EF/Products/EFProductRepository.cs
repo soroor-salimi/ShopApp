@@ -40,16 +40,17 @@ namespace ShopApp.Persistanse.EF.Products
                 CategoryId = _.CategoryId,
                 Inventory = _.Inventory,
                 MinimumInventory = _.MinimumInventory,
-               // StatusType = _.statusType,
+                StatusType = (int) _.statusType,
                 Title = _.Title,
-            }).OrderBy(t => t.Title);
+            });
 
-            //if (statusType != null)
-            //{
-            //    result = result.Where(_ => _.StatusType == statusType);
-            //}
+            if (statusType != null)
+            {
+               
+                result = result.Where(_ => _.StatusType ==  statusType);
+            }
 
-            return result.ToList();
+            return result.OrderBy(t => t.Title).ToList();
         }
 
         public bool IsDublcateTitle(string title)

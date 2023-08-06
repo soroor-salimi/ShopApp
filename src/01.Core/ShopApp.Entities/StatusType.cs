@@ -12,6 +12,6 @@ namespace ShopApp.Entities
         Available = 1,
         ReadyToOrder = 2,
         unAvailable = 3
-
     }
+
 }

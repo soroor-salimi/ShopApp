@@ -28,12 +28,11 @@ namespace ShopApp.Specs.Test.Products.Add
                 _category = CategoryFactory.Generate("بهداشتی");
                 DbContext.Save(_category);
 
-                var product = new Product()
-                {
-                    Title = "شامپو",
-                    CategoryId = _category.Id
-                };
-                DbContext.Save(product);
+                var propduct = new ProductBuilder()
+             .WithTitle("شامپو")
+             .WithCategoryId(_category.Id)
+             .Build();
+                DbContext.Save(propduct);
             }
 
             [When("یک کالا با عنوان شامپو و " +

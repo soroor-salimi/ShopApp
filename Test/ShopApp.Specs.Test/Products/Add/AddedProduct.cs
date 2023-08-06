@@ -33,16 +33,16 @@ namespace ShopApp.Specs.Test.Products.Add
             _category1 = CategoryFactory.Generate("لبنیات");
             DbContext.Save(_category1);
 
-            var propduct = new Product()
-            {
-                Title = "شیر ",
-                CategoryId = _category1.Id
-
-            };
+            var propduct = new ProductBuilder()
+                .WithTitle("شیر")
+                .WithCategoryId(_category1.Id)
+                .Build();
+            DbContext.Save(propduct);
         }
 
         [When("یک کالا با عنوان شیر در گروه " +
-            "اسباب بازی  با حداقل موجودی ۱۰ را ثبت میکنم ")]
+            "اسباب بازی  با " +
+            "موجودی 0 و وضعیت موجودی ناموجود حداقل موجودی ۱۰ را ثبت میکنم ")]
         public void When()
         {
             var dto = new AddProductDtoBuilder()
