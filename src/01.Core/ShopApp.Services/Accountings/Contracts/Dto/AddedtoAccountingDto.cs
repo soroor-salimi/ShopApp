@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopApp.Entities
+namespace ShopApp.Services.Accountings.Contracts.Dto
 {
-    public class Accounting
+    public class AddedAccountingDto
     {
-        public int Id { get; set; }
+        [Required]
         public DateTime DocumentRegistrationDate { get; set; }
+        [Required]
         public int NumberOfDocument { get; set; }
+        [Required]
+        [MaxLength(255)]
         public string NumberOfinvoiceSell { get; set; }
+        [Required]
         public double TotalPrice { get; set; }
-
-        public Sell Sell { get; set; }
     }
 }

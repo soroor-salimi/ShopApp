@@ -19,7 +19,7 @@ namespace ShopApp.TestTools.ProductArrivals
                 NameCompany = "فپکو",
                 ProductId = 0,
                 Count = 0,
-                StatusType = StatusType.unavailable,
+                StatusType = StatusType.Available,
                 NumberOfInvoice = "123a",
                 DateTime = DateTime.UtcNow,
 

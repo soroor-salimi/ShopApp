@@ -17,7 +17,7 @@ namespace ShopApp.TestTools.Products
                 CategoryId = 0,
                 Inventory = 0,
                 MinimumInventory = 20,
-                StatusType = StatusType.unavailable,
+                StatusType = StatusType.Available,
             };
 
         }

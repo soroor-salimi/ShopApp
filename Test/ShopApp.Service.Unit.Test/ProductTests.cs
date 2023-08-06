@@ -26,7 +26,7 @@ namespace ShopApp.Service.Unit.Test
             var propduct = new Product()
             {
                 Title = "شیر ",
-                CategoryId= category1.Id,
+                CategoryId = category1.Id,
 
             };
             DbContext.Save(propduct);
@@ -36,16 +36,18 @@ namespace ShopApp.Service.Unit.Test
                .WithCategoryId(category.Id)
                .WithMinimumInventory(10)
                .WithInventory(0)
+               .WithStatusType(StatusType.Available)
                .Build();
 
             var sut = ProductServicesFactories.Create(SetupContext);
             sut.Add(dto);
 
             var expected = ReadContext.Set<Product>()
-                .First(_=>_.CategoryId==dto.CategoryId);
+                .First(_ => _.CategoryId == dto.CategoryId);
             expected.CategoryId.Should().Be(category.Id);
             expected.Title.Should().Be(dto.Title);
             expected.Inventory.Should().Be(dto.Inventory);
+            expected.statusType.Should().Be(dto.StatusType);
             expected.MinimumInventory.Should().Be(dto.MinimumInventory);
 
         }
@@ -77,7 +79,7 @@ namespace ShopApp.Service.Unit.Test
             var product = new Product()
             {
                 Title = "شامپو",
-                CategoryId=category.Id,
+                CategoryId = category.Id,
             };
             DbContext.Save(product);
 
@@ -92,7 +94,7 @@ namespace ShopApp.Service.Unit.Test
 
             expected.Should().ThrowExactly<TheTitleOfTheProductIsDublicatedEception>();
         }
-           [Fact]
+        [Fact]
         public void Delete_deleted_product_properly()
         {
             var category = CategoryFactory.Generate("بهداشتی");
@@ -100,9 +102,9 @@ namespace ShopApp.Service.Unit.Test
             var product = new Product()
             {
                 CategoryId = category.Id,
-                Title="شامپو",
-                Inventory=0,
-                MinimumInventory=10,
+                Title = "شامپو",
+                Inventory = 0,
+                MinimumInventory = 10,
             };
             DbContext.Save(product);
 
@@ -125,8 +127,69 @@ namespace ShopApp.Service.Unit.Test
         [Fact]
         public void Update_update_inventory_product_properly()
         {
+            var category = CategoryFactory.Generate("بهداشتی");
+            DbContext.Save(category);
+            var product = new Product()
+            {
+                CategoryId = category.Id,
+                Title = "شامپو",
+                Inventory = 20,
+                MinimumInventory = 10,
+                statusType = StatusType.Available,
+            };
+            DbContext.Save(product);
 
+            var dto = new UpdateProductDto()
+            {
+                Inventory = 30
+            };
+
+            var sut = ProductServicesFactories.Create(SetupContext);
+            sut.Update(product.Id, dto);
+
+            var expect = ReadContext.Set<Product>().Single();
+            expect.Id.Should().Be(product.Id);
+            expect.Inventory.Should().Be(dto.Inventory);
+            expect.Title.Should().Be(product.Title);
+            expect.MinimumInventory.Should().Be(product.MinimumInventory);
+            expect.statusType.Should().Be(StatusType.Available);
         }
+
+        //[Theory]
+        //[InlineData(StatusType.Available)]
+        //[InlineData(StatusType.ReadyToOrder)]
+        //[InlineData(StatusType.unAvailable)]
+        //public void Get_get_all_inventory_product_properly(StatusType type)
+        //{
+        //    var category = CategoryFactory.Generate("بهداشتی");
+        //    DbContext.Save(category);
+        //    var product = new ProductBuilder()
+        //        .WithInventory(0)
+        //        .WithMinimumInventory(10)
+        //        .WithCategoryId(category.Id)
+        //        .WithTitle("dummy")
+        //        .WithStatusType(type)
+        //        .Build();
+        //    DbContext.Save(product);
+        //    var product1 = new ProductBuilder()
+        //        .WithInventory(5)
+        //        .WithMinimumInventory(10)
+        //        .WithCategoryId(category.Id)
+        //        .WithTitle("dummy_pro")
+        //        .WithStatusType(type)
+        //        .Build();
+        //    DbContext.Save(product1);
+
+        //    var sut = ProductServicesFactories.Create(SetupContext);
+        //    var result = sut.GetAll();
+
+           // result.Should().BeEquivalentTo(product1,_=>_.Including(i=>i.Inventory);
+
+
+
+
+
+        
     }
-    
+
 }

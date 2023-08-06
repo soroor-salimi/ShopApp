@@ -45,10 +45,19 @@ namespace ShopApp.Services.ProductArrivals
             {
                 throw new ProductIsNotFoundException();
             }
+
             product.Inventory = product.Inventory + dto.Count;
 
+         
+            if (product.Inventory <= product.MinimumInventory)
+            {
+                product.statusType = StatusType.ReadyToOrder;
+            }
+            else
+            {
+                product.statusType = StatusType.Available;
+            }
             _productRepository.Update(product);
-
             _unitOfWork.Complete();
 
 

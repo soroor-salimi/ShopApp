@@ -10,7 +10,7 @@ using ShopApp.TestTools.infrastructure.DataBaseConfig;
 using ShopApp.TestTools.infrastructure.DataBaseConfig.Integration;
 using ShopApp.TestTools.Products;
 
-namespace OnlineShop.Specs.Tests.Products.Add
+namespace ShopApp.Specs.Test.Products.Add
 {
     public class DublicateNameProductInthisCategory
     {
@@ -30,8 +30,8 @@ namespace OnlineShop.Specs.Tests.Products.Add
 
                 var product = new Product()
                 {
-                  Title= "شامپو",
-                  CategoryId=_category.Id
+                    Title = "شامپو",
+                    CategoryId = _category.Id
                 };
                 DbContext.Save(product);
             }
@@ -45,7 +45,7 @@ namespace OnlineShop.Specs.Tests.Products.Add
                 .WithCategoryId(_category.Id)
                 .WithMinimumInventory(10)
                 .Build();
-               
+
                 _expected = () => ProductServicesFactories.Create(SetupContext)
                 .Add(dto);
 

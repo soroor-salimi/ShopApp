@@ -18,7 +18,9 @@ namespace ShopApp.TestTools.Products
             var unitOfWork = new EFUnitOfWork(context);
             var productRepository = new EFProductRepository(context);
             var categoryRepository = new EFCategoryRepository(context);
-            var sut = new ProductAppServices(productRepository,categoryRepository, unitOfWork);
+            var sut = new ProductAppServices(productRepository
+                ,categoryRepository
+                , unitOfWork);
 
             return sut;
         }

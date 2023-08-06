@@ -54,27 +54,27 @@ namespace ShopApp.Service.Unit.Test
 
         }
 
-        //[Fact]
-        //public void Get_get_all_product_with_one_category_properly()
-        //{
-        //    var category = CategoryFactory.Generate("بهداشتی");
-        //    DbContext.Save(category);
-        //    var product = new Product()
-        //    {
-        //        Title = "شامپو",
-        //        Inventory=0,
-        //        MinimumInventory=10,
-        //        CategoryId = category.Id,
-        //    };
-        //    DbContext.Save(product);
+        [Fact]
+        public void Get_get_all_product_with_one_category_properly()
+        {
+            var category = CategoryFactory.Generate("بهداشتی");
+            DbContext.Save(category);
+            var product = new Product()
+            {
+                Title = "شامپو",
+                Inventory = 0,
+                MinimumInventory = 10,
+                CategoryId = category.Id,
+            };
+            DbContext.Save(product);
 
 
-        //    var sut= CategoryServicesFactories.Create(SetupContext);
-        //    var result =sut.GetAllproductWithcategoryId(category.Id);
+            var sut = CategoryServicesFactories.Create(SetupContext);
+            var result = sut.GetAllproductWithcategoryId(category.Id);
 
-        //   result.Should().;
-           
-        //}
+           // result.Should().;
+
+        }
         [Fact]
         public void update_update_name_category_properly()
         {

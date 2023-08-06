@@ -45,12 +45,11 @@ namespace ShopApp.Migrations
                 .WithColumn("DocumentRegistrationDate").AsDateTime().NotNullable()
                 .WithColumn("NumberOfDocument").AsInt32().NotNullable()
                 .WithColumn("NumberOfinvoiceSell").AsString(255).NotNullable()
-                .WithColumn("TotalCount").AsDouble().NotNullable();
+                .WithColumn("TotalPrice").AsDouble().NotNullable();
 
             Create.Table("Sells")
                  .WithColumn("Id").AsInt32().PrimaryKey().Identity()
                  .WithColumn("Count").AsInt32().NotNullable()
-                 .WithColumn("StatusType").AsInt32().NotNullable()
                  .WithColumn("Price").AsDouble().NotNullable()
                  .WithColumn("DateTime").AsDateTime().NotNullable()
                  .WithColumn("NumberOfInvoice").AsString(255).NotNullable()

@@ -16,7 +16,6 @@ namespace ShopApp.Entities
         public DateTime DateTime { get; set; }
         public int Count { get; set; }
         public double Price { get; set; }
-        public StatusType StatusType { get; set; }
         public Accounting Accounting { get; set; }
         public Product Product { get; set; }
     }

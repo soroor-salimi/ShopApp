@@ -16,7 +16,7 @@ namespace ShopApp.Persistanse.EF.Accountings
             entity.ToTable("Accountings");
             entity.HasKey(_ => _.Id);
             entity.Property(_ => _.Id).ValueGeneratedOnAdd();
-            entity.Property(_ => _.TotalCount).IsRequired();
+            entity.Property(_ => _.TotalPrice).IsRequired();
             entity.Property(_ => _.NumberOfinvoiceSell).IsRequired();
             entity.Property(_ => _.NumberOfDocument).IsRequired();
             entity.Property(_ => _.DocumentRegistrationDate).IsRequired();

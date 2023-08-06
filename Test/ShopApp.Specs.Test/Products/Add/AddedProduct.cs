@@ -50,6 +50,7 @@ namespace ShopApp.Specs.Test.Products.Add
                 .WithCategoryId(_category.Id)
                 .WithMinimumInventory(10)
                 .WithInventory(0)
+                .WithStatusType(StatusType.Available)
                 .Build();
 
             var sut = ProductServicesFactories.Create(SetupContext);
@@ -66,6 +67,7 @@ namespace ShopApp.Specs.Test.Products.Add
             expected.CategoryId.Should().Be(_category.Id);
             expected.MinimumInventory.Should().Be(10);
             expected.Inventory.Should().Be(0);
+            expected.statusType.Should().Be(StatusType.Available);
 
         }
 

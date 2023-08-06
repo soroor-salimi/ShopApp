@@ -18,8 +18,9 @@ namespace ShopApp.Service.Unit.Test
     public class ProductArrivalTest : BusinessUnitTest
     {
         [Theory]
-        [InlineData(StatusType.unavailable)]
+        [InlineData(StatusType.Available)]
         [InlineData(StatusType.ReadyToOrder)]
+        [InlineData(StatusType.unAvailable)]
         public void Added_add_productArrical_peroperly(StatusType type)
         {
             var category = CategoryFactory.Generate("بهداشتی");
@@ -29,6 +30,7 @@ namespace ShopApp.Service.Unit.Test
                .WithMinimumInventory(10)
                .WithCategoryId(category.Id)
                .WithTitle("شامپو")
+               .WithStatusType(type)
                .Build();
             DbContext.Save(product);
 
@@ -37,7 +39,6 @@ namespace ShopApp.Service.Unit.Test
                 .WithNumberOfInvoice("123a")
                 .WithCount(20)
                 .WithNameCompany("فپکو")
-                .WithStatusType(type)
                 .WithDateTime(new DateTime(2023,7,3))
                 .Build();
            
@@ -63,6 +64,7 @@ namespace ShopApp.Service.Unit.Test
             var expectProduct = ReadContext.Set<Product>().Single();
             expectProduct.Inventory.Should().Be(productDto.Inventory);
             expectProduct.Title.Should().Be(product.Title);
+            expectProduct.statusType.Should().Be(product.statusType);
             expectProduct.CategoryId.Should().Be(product.CategoryId);
             expectProduct.MinimumInventory.Should().Be(product.MinimumInventory);
 

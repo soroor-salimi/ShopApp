@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShopApp.Entities;
 using ShopApp.Services.Products.Contracts;
+using ShopApp.Services.Products.Contracts.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,26 @@ namespace ShopApp.Persistanse.EF.Products
         {
             return _products.Find(id);
         }
+
+        //public List<GetAllProductDto> GetAll(int? statusType)
+        //{
+        //    var result = _products.Select(_ => new GetAllProductDto()
+        //    {
+        //        Id = _.Id,
+        //        CategoryId = _.CategoryId,
+        //        Inventory = _.Inventory,
+        //        MinimumInventory = _.MinimumInventory,
+        //        StatusType = _.statusType,
+        //        Title = _.Title,
+        //    }).OrderBy(t => t.Title);
+
+        //    if (statusType != null)
+        //    {
+        //        result = result.Where(_ => _.StatusType == statusType);
+        //    }
+
+        //    return result.ToList();
+        //}
 
         public bool IsDublcateTitle(string title)
         {

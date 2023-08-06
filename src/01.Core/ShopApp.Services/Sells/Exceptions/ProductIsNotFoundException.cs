@@ -4,14 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopApp.Entities
+namespace ShopApp.Services.Sells.Exceptions
 {
-    public enum StatusType
+    public class ProductIsNotFoundException:Exception
     {
-
-        Available = 1,
-        ReadyToOrder = 2,
-        unAvailable = 3
-
     }
 }

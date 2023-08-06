@@ -45,6 +45,7 @@ namespace ShopApp.Services.Products
                 CategoryId = dto.CategoryId,
                 Inventory = dto.Inventory,
                 MinimumInventory = dto.MinimumInventory,
+                statusType=dto.StatusType,
             };
             _repository.Add(product);
             _unitOfWork.Complete();
@@ -61,6 +62,11 @@ namespace ShopApp.Services.Products
             _repository.DeletedProduct(product);
             _unitOfWork.Complete();
         }
+
+        //public List< GetAllProductDto> GetAll(int? statusType)
+        //{
+        //   return _repository.GetAll(statusType);
+        //}
 
         public void Update(int productId, UpdateProductDto productDto)
         {
