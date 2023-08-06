@@ -32,25 +32,25 @@ namespace ShopApp.Persistanse.EF.Products
             return _products.Find(id);
         }
 
-        //public List<GetAllProductDto> GetAll(int? statusType)
-        //{
-        //    var result = _products.Select(_ => new GetAllProductDto()
-        //    {
-        //        Id = _.Id,
-        //        CategoryId = _.CategoryId,
-        //        Inventory = _.Inventory,
-        //        MinimumInventory = _.MinimumInventory,
-        //        StatusType = _.statusType,
-        //        Title = _.Title,
-        //    }).OrderBy(t => t.Title);
+        public List<GetAllProductDto> GetAll(int? statusType)
+        {
+            var result = _products.Select(_ => new GetAllProductDto()
+            {
+                Id = _.Id,
+                CategoryId = _.CategoryId,
+                Inventory = _.Inventory,
+                MinimumInventory = _.MinimumInventory,
+               // StatusType = _.statusType,
+                Title = _.Title,
+            }).OrderBy(t => t.Title);
 
-        //    if (statusType != null)
-        //    {
-        //        result = result.Where(_ => _.StatusType == statusType);
-        //    }
+            //if (statusType != null)
+            //{
+            //    result = result.Where(_ => _.StatusType == statusType);
+            //}
 
-        //    return result.ToList();
-        //}
+            return result.ToList();
+        }
 
         public bool IsDublcateTitle(string title)
         {

@@ -155,41 +155,38 @@ namespace ShopApp.Service.Unit.Test
             expect.statusType.Should().Be(StatusType.Available);
         }
 
-        //[Theory]
-        //[InlineData(StatusType.Available)]
-        //[InlineData(StatusType.ReadyToOrder)]
-        //[InlineData(StatusType.unAvailable)]
-        //public void Get_get_all_inventory_product_properly(StatusType type)
-        //{
-        //    var category = CategoryFactory.Generate("بهداشتی");
-        //    DbContext.Save(category);
-        //    var product = new ProductBuilder()
-        //        .WithInventory(0)
-        //        .WithMinimumInventory(10)
-        //        .WithCategoryId(category.Id)
-        //        .WithTitle("dummy")
-        //        .WithStatusType(type)
-        //        .Build();
-        //    DbContext.Save(product);
-        //    var product1 = new ProductBuilder()
-        //        .WithInventory(5)
-        //        .WithMinimumInventory(10)
-        //        .WithCategoryId(category.Id)
-        //        .WithTitle("dummy_pro")
-        //        .WithStatusType(type)
-        //        .Build();
-        //    DbContext.Save(product1);
+        [Theory]
+        [InlineData(StatusType.Available)]
+        [InlineData(StatusType.ReadyToOrder)]
+        [InlineData(StatusType.unAvailable)]
+        public void Get_get_all_inventory_product_properly(StatusType type)
+        {
+            var category = CategoryFactory.Generate("بهداشتی");
+            DbContext.Save(category);
+            var product = new ProductBuilder()
+                .WithInventory(0)
+                .WithMinimumInventory(10)
+                .WithCategoryId(category.Id)
+                .WithTitle("dummy")
+                .WithStatusType(type)
+                .Build();
+            DbContext.Save(product);
+            var product1 = new ProductBuilder()
+                .WithInventory(5)
+                .WithMinimumInventory(10)
+                .WithCategoryId(category.Id)
+                .WithTitle("dummy_pro")
+                .WithStatusType(type)
+                .Build();
+            DbContext.Save(product1);
 
-        //    var sut = ProductServicesFactories.Create(SetupContext);
-        //    var result = sut.GetAll();
+            var sut = ProductServicesFactories.Create(SetupContext);
+            //var result = sut.GetAll();
 
            // result.Should().BeEquivalentTo(product1,_=>_.Including(i=>i.Inventory);
 
 
-
-
-
-        
+        }
     }
 
 }

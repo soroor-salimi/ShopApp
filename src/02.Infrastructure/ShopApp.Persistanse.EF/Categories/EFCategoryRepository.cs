@@ -23,32 +23,24 @@ namespace ShopApp.Persistanse.EF.Categories
         {
             _categories.Add(category);
         }
-
-        public void DeletedCategory(Category category)
-        {
-            _categories.Remove(category);
-        }
-
-        public bool DublicateName(string name)
-        {
-            return _categories.Any(_ => _.Name == name);
-        }
-        public Category? FindById(int id)
-        {
-            return _categories.Find(id);
-        }
-
         public List<GetAllCategoryDto> GetAll()
         {
             var result = _categories.Select(_ => new GetAllCategoryDto()
             {
-                Name = _.Name,
-                Id = _.Id
+                Id = _.Id,
+                Name = _.Name
             });
 
             return result.ToList();
         }
-
+        public void UpdateName(Category category)
+        {
+            _categories.Update(category);
+        }
+        public void DeletedCategory(Category category)
+        {
+            _categories.Remove(category);
+        }
         public GetCategoryDto? GetCategoryWithProduct(int id)
         {
             var result = _categories.Where(_ => _.Id == id)
@@ -68,20 +60,23 @@ namespace ShopApp.Persistanse.EF.Categories
 
             return result.FirstOrDefault();
         }
-
-        public bool HasProduct(int categoryId)
-        {                        
-            return _products.Any(_ => _.CategoryId == categoryId);                     
+        public bool DublicateName(string name)
+        {
+            return _categories.Any(_ => _.Name == name);
         }
-
+        public Category? FindById(int id)
+        {
+            return _categories.Find(id);
+        }
+        public bool HasProduct(int categoryId)
+        {
+            return _products.Any(_ => _.CategoryId == categoryId);
+        }
         public bool IsDublicateName(int id, string name)
         {
             return _categories.Any(_ => _.Name == name && _.Id != id);
         }
 
-        public void UpdateName(Category category)
-        {
-            _categories.Update(category);
-        }
+
     }
 }

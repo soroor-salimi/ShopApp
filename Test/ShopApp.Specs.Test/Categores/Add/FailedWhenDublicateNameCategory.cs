@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.Specs.Test.Categores.Add
 {
-    [Scenario("ثبت گروه با نام تکراری")]
+    [Scenario(" ثبت گروه با نام تکراری")]
     public class FailedWhenDublicateNameCategory : BusinessIntegrationTest
     {
         private Action _expected;
@@ -28,7 +28,8 @@ namespace ShopApp.Specs.Test.Categores.Add
         {
             var dto = CategoryDtoFactory.Generate("بهداشتی");
 
-            _expected = () => CategoryServicesFactories.Create(SetupContext).Add(dto);
+            _expected = () => CategoryServicesFactories
+            .Create(SetupContext).Add(dto);
 
         }
 

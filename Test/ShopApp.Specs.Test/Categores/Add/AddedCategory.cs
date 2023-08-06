@@ -13,10 +13,10 @@ using Xunit;
 
 namespace ShopApp.Specs.Test.Categores.Add
 {
-    [Scenario("میخواهم یک دسته بندی را ثبت کنم")]
+    [Scenario(" ثبت گروه ")]
     public class AddCatgory : BusinessIntegrationTest
     {
-        [Given("فهرست دسته بندی ها خالی است")]
+        [Given("فهرست گروه خالی است ")]
         public void Given()
         {
 
@@ -26,7 +26,6 @@ namespace ShopApp.Specs.Test.Categores.Add
         public void When()
         {
             var dto = CategoryDtoFactory.Generate("بهداشتی");
-
             var sut = CategoryServicesFactories.Create(SetupContext);
             sut.Add(dto);
 

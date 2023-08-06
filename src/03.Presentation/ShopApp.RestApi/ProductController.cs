@@ -19,11 +19,11 @@ namespace ShopApp.RestApi
         {
             _services.Add(dto);
         }
-        //[HttpGet]
-        //public void Get([FromQuery]int? statusType)
-        //{
-        //    _services.GetAll(statusType);
-        //}
+        [HttpGet("for_admin")]
+        public void Get([FromQuery]int? statusType)
+        {
+            _services.GetAll(statusType);
+        }
         [HttpDelete("{id}")]
         public void Delete([FromRoute]int id)
         {

@@ -63,10 +63,10 @@ namespace ShopApp.Services.Products
             _unitOfWork.Complete();
         }
 
-        //public List< GetAllProductDto> GetAll(int? statusType)
-        //{
-        //   return _repository.GetAll(statusType);
-        //}
+        public List< GetAllProductDto> GetAll(int? statusType)
+        {
+           return _repository.GetAll(statusType);
+        }
 
         public void Update(int productId, UpdateProductDto productDto)
         {

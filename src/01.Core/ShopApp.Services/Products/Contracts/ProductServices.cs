@@ -12,6 +12,6 @@ namespace ShopApp.Services.Products.Contracts
         void Add(AddProductDto dto);
         void DeleteProduct(int id);
         void Update(int productId, UpdateProductDto productDto);
-       // List<GetAllProductDto> GetAll(int? statusType);
+        List<GetAllProductDto> GetAll(int? statusType);
     }
 }

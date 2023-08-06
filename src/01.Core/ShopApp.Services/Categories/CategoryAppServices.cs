@@ -16,7 +16,8 @@ namespace ShopApp.Services.Categories
     {
         private CategoryRepository _repository;
         private UnitOfWork _unitOfWork;
-        public CategoryAppServices(CategoryRepository repository, UnitOfWork unitOfWork)
+        public CategoryAppServices(CategoryRepository repository
+            , UnitOfWork unitOfWork)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
@@ -34,6 +35,29 @@ namespace ShopApp.Services.Categories
                 Name = dto.Name,
             };
             _repository.Add(categoryDto);
+            _unitOfWork.Complete();
+        }
+        public List<GetAllCategoryDto> GetAll()
+        {
+            return _repository.GetAll();
+        }
+        public void UpdateNameCategory(int id, UpdateCategoryNameDto dto)
+        {
+            var category = _repository.FindById(id);
+            if (category == null)
+            {
+                throw new IdIsNotFoundException();
+            };
+
+            bool isdDuplicate = _repository.IsDublicateName(id, dto.Name);
+            if (isdDuplicate)
+            {
+                throw new CategoryNameIsExistException();
+            }
+
+            category.Name = dto.Name;
+
+            _repository.UpdateName(category);
             _unitOfWork.Complete();
         }
 
@@ -54,34 +78,11 @@ namespace ShopApp.Services.Categories
             _unitOfWork.Complete();
         }
 
-        public List<GetAllCategoryDto> GetAll()
-        {
-            return _repository.GetAll();
-        }
-
         public GetCategoryDto GetAllproductWithcategoryId(int id)
         {
             return _repository.GetCategoryWithProduct(id);
         }
 
-        public void UpdateNameCategory(int id, UpdateCategoryNameDto dto)
-        {
-            var category = _repository.FindById(id);
-            if (category == null)
-            {
-                throw new IdIsNotFoundException();
-            };
-
-            bool isdDuplicate = _repository.IsDublicateName(id, dto.Name);
-            if (isdDuplicate)
-            {
-                throw new CategoryNameIsExistException();
-            }
-
-            category.Name = dto.Name;
-
-            _repository.UpdateName(category);
-            _unitOfWork.Complete();
-        }
+      
     }
 }
