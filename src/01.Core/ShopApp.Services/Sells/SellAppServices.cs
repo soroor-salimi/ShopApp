@@ -40,16 +40,10 @@ namespace ShopApp.Services.Sells
             {
                 throw new ProductIsNotFoundException();
             }
-            var accountingF = _accountingrepository.FindById(dto.AccountingId);
-            if (accountingF == null)
-            {
-                throw new AccountingIsNotFoundException();
-            }
-
+         
             var sell = new Sell()
             {
                Count=dto.Count,
-               AccountingId=dto.AccountingId,
                CustomerName=dto.CustomerName,
                ProductId=dto.ProductId,
                Price=dto.Price,
@@ -63,6 +57,8 @@ namespace ShopApp.Services.Sells
                 NumberOfinvoiceSell = dto.NumberOfinvoiceSell,
                 NumberOfDocument=dto.AccountinginSell.NumberOfDocument
             };
+
+            sell.Accounting = accounting;
             _repository.Add(sell);
           
             product.Inventory = product.Inventory - dto.Count;

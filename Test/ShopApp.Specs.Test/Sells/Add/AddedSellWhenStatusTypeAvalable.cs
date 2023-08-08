@@ -58,6 +58,7 @@ namespace ShopApp.Specs.Test.Sells.Add
             };
             dto.AccountinginSell = new AddedAccountingForSellDto()
             {
+                
                 DocumentRegistrationDate = (new DateTime(2023, 8, 3)),
                 NumberOfDocument = 1233455657,
                 NumberOfinvoiceSell = "123a",

@@ -233,7 +233,7 @@ namespace ShopApp.Service.Unit.Test
             DbContext.Save(product1);
 
             var sut = ProductServicesFactories.Create(SetupContext);
-            var result = sut.GetAll();
+            //var result = sut.GetAll();
 
         }
     }

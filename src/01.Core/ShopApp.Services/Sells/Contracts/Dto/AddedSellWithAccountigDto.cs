@@ -17,8 +17,6 @@ namespace ShopApp.Services.Sells.Contracts.Dto
         [MaxLength(255)]
         public string ProductName { get; set; }
         [Required]
-        public int AccountingId { get; set; }
-        [Required]
         [MaxLength(255)]
         public string NumberOfinvoiceSell { get; set; }
         [Required]

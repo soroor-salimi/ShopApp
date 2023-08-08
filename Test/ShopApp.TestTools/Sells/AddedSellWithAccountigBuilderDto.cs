@@ -15,7 +15,6 @@ namespace ShopApp.TestTools.Sells
         {
             _sell = new AddedSellWithAccountigDto()
             {
-                AccountingId = 0,
                 Count = 0,
                 CustomerName = "رضوی",
                 ProductId = 0,
@@ -26,11 +25,7 @@ namespace ShopApp.TestTools.Sells
             };
         }
 
-        public AddedSellWithAccountigBuilderDto WithAccountingId(int accountinId)
-        {
-            _sell.AccountingId = accountinId;
-            return this;
-        }
+     
         public AddedSellWithAccountigBuilderDto WithProductId(int productId)
         {
             _sell.ProductId = productId;
