@@ -20,9 +20,9 @@ namespace ShopApp.RestApi
             _services.Add(dto);
         }
         [HttpGet()]
-        public void Get([FromQuery]int? statusType)
+        public void Get([FromQuery]searchingProductDto? dto)
         {
-            _services.GetAll(statusType);
+            _services.GetAll(dto);
         }
         [HttpDelete("{id}")]
         public void Delete([FromRoute]int id)

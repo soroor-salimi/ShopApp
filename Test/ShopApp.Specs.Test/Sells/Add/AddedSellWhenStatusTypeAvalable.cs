@@ -56,15 +56,7 @@ namespace ShopApp.Specs.Test.Sells.Add
                 ProductId = _product.Id,
                 NumberOfinvoiceSell = "123a"
             };
-            dto.AccountinginSell = new AddedAccountingForSellDto()
-            {
-                
-                DocumentRegistrationDate = (new DateTime(2023, 8, 3)),
-                NumberOfDocument = 1233455657,
-                NumberOfinvoiceSell = "123a",
-                TotalPrice = dto.Price * dto.Count,
-            };
-
+         
             var sut = SellServicesFactories.Create(SetupContext);
             sut.AddWithAccounting(dto);
 

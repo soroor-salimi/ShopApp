@@ -28,6 +28,5 @@ namespace ShopApp.Services.Sells.Contracts.Dto
         public int Count { get; set; }
         [Required]
         public double Price { get; set; }
-        public AddedAccountingForSellDto AccountinginSell { get; set; }
     }
 }

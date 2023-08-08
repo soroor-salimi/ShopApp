@@ -64,9 +64,9 @@ namespace ShopApp.Services.Products
             _unitOfWork.Complete();
         }
 
-        public List<GetAllProductDto> GetAll(int? statusType)
+        public List<GetAllProductDto> GetAll(searchingProductDto?dto)
         {
-            return _repository.GetAll(statusType);
+            return _repository.GetAll(dto);
         }
 
         public void Update(int productId, UpdateProductDto productDto)

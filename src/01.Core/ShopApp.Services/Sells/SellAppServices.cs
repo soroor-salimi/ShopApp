@@ -52,14 +52,15 @@ namespace ShopApp.Services.Sells
             };
             var accounting = new Accounting()
             {
-                TotalPrice = dto.Count * dto.Price,
-                DocumentRegistrationDate = DateTime.UtcNow,
-                NumberOfinvoiceSell = dto.NumberOfinvoiceSell,
-                NumberOfDocument=dto.AccountinginSell.NumberOfDocument
+                Sell=sell,
+                TotalPrice = sell.Price*sell.Count,
+                DocumentRegistrationDate=DateTime.UtcNow,
+                NumberOfDocument=45,
+                NumberOfinvoiceSell=sell.NumberOfinvoiceSell,               
             };
 
-            sell.Accounting = accounting;
-            _repository.Add(sell);
+            _accountingrepository.Add(accounting);
+           
           
             product.Inventory = product.Inventory - dto.Count;
 

@@ -209,8 +209,8 @@ namespace ShopApp.Service.Unit.Test
             expect.MinimumInventory.Should().Be(product.MinimumInventory);
             expect.statusType.Should().Be(StatusType.ReadyToOrder);
         }
-
-        public void get_get_all_inventory_product_properly()
+        [Fact]
+        public void get_get_all_unAvaLable_product_properly()
         {
             var category = CategoryFactory.Generate("dummy");
             DbContext.Save(category);
@@ -223,18 +223,62 @@ namespace ShopApp.Service.Unit.Test
                 .Build();
             DbContext.Save(product);
 
-            var product1 = new ProductBuilder()
-                .WithInventory(5)
-                .WithMinimumInventory(10)
-                .WithCategoryId(category.Id)
-                .WithTitle("dummy_pro")
-                .WithStatusType(StatusType.ReadyToOrder)
-                .Build();
-            DbContext.Save(product1);
+        
 
             var sut = ProductServicesFactories.Create(SetupContext);
-            //var result = sut.GetAll();
+            var result = sut.GetAll();
+             
+            result.Should().HaveCount(1);
+            result.Single().Title.Should().Be(product.Title);
+            result.Single().Inventory.Should().Be(product.Inventory);
+            result.Single().CategoryId.Should().Be(product.CategoryId);
+            result.Single().StatusType.Should().Be(StatusType.unAvailable);
+        }  
+        [Fact]
+        public void get_get_all_avalable_product_properly()
+        {
+            var category = CategoryFactory.Generate("dummy");
+            DbContext.Save(category);
+            var product = new ProductBuilder()
+                .WithInventory(0)
+                .WithMinimumInventory(10)
+                .WithCategoryId(category.Id)
+                .WithTitle("dummy_title")
+                .WithStatusType(StatusType.Available)
+                .Build();
+            DbContext.Save(product);
 
+            var sut = ProductServicesFactories.Create(SetupContext);
+            var result = sut.GetAll();
+             
+            result.Should().HaveCount(1);
+            result.Single().Title.Should().Be(product.Title);
+            result.Single().Inventory.Should().Be(product.Inventory);
+            result.Single().CategoryId.Should().Be(product.CategoryId);
+            result.Single().StatusType.Should().Be(StatusType.Available);
+        } 
+        [Fact]
+        public void get_get_all_readyToOrder_product_properly()
+        {
+            var category = CategoryFactory.Generate("dummy");
+            DbContext.Save(category);
+            var product = new ProductBuilder()
+                .WithInventory(0)
+                .WithMinimumInventory(10)
+                .WithCategoryId(category.Id)
+                .WithTitle("dummy_title")
+                .WithStatusType(StatusType.ReadyToOrder)
+                .Build();
+            DbContext.Save(product);       
+
+            var sut = ProductServicesFactories.Create(SetupContext);
+            var result = sut.GetAll();
+             
+            result.Should().HaveCount(1);
+            result.Single().Title.Should().Be(product.Title);
+            result.Single().Inventory.Should().Be(product.Inventory);
+            result.Single().CategoryId.Should().Be(product.CategoryId);
+            result.Single().StatusType.Should().Be(StatusType.ReadyToOrder);
         }
     }
 

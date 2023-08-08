@@ -27,10 +27,7 @@ namespace ShopApp.Persistanse.EF.Sells
                 .WithMany(_ => _.Sells)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            entity.Property(_ => _.AccountingId).IsRequired();
-            entity.HasOne(_ => _.Accounting)
-                .WithOne(_ => _.Sell)
-                .OnDelete(DeleteBehavior.Cascade);
+      
 
 
         }

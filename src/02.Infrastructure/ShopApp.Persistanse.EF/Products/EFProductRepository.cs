@@ -32,7 +32,7 @@ namespace ShopApp.Persistanse.EF.Products
             return _products.Find(id);
         }
 
-        public List<GetAllProductDto> GetAll(int? statusType)
+        public List<GetAllProductDto> GetAll(searchingProductDto? dto)
         {
             var result = _products.Select(_ => new GetAllProductDto()
             {
@@ -40,14 +40,14 @@ namespace ShopApp.Persistanse.EF.Products
                 CategoryId = _.CategoryId,
                 Inventory = _.Inventory,
                 MinimumInventory = _.MinimumInventory,
-                StatusType = (int)_.statusType,
+                StatusType =_.statusType,
                 Title = _.Title,
             });
 
-            if (statusType != null)
+            if (dto?.type != null)
             {
 
-                result = result.Where(_ => _.StatusType == statusType);
+                result = result.Where(_ => _.StatusType == dto.type);
             }
 
             return result.OrderBy(t => t.Title).ToList();

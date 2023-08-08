@@ -10,13 +10,11 @@ namespace ShopApp.Entities
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
-        public int AccountingId { get; set; }
         public string NumberOfinvoiceSell { get; set; }
         public string CustomerName { get; set; }
         public DateTime DateTime { get; set; }
         public int Count { get; set; }
         public double Price { get; set; }
-        public Accounting Accounting { get; set; }
         public Product Product { get; set; }
     }
 }

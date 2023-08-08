@@ -13,7 +13,7 @@ namespace ShopApp.Entities
         public int NumberOfDocument { get; set; }
         public string NumberOfinvoiceSell { get; set; }
         public double TotalPrice { get; set; }
-
+        public int SellId { get; set; }
         public Sell Sell { get; set; }
     }
 }

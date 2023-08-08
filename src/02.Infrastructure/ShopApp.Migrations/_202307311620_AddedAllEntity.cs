@@ -38,6 +38,17 @@ namespace ShopApp.Migrations
                .WithColumn("ProductId").AsInt32().NotNullable()
          .ForeignKey("Fk_Products_ProductArrivals", "Products", "Id");
 
+            Create.Table("Sells")
+               .WithColumn("Id").AsInt32().PrimaryKey().Identity()
+               .WithColumn("Count").AsInt32().NotNullable()
+               .WithColumn("Price").AsDouble().NotNullable()
+               .WithColumn("DateTime").AsDateTime().NotNullable()
+               .WithColumn("NumberOfInvoice").AsString(255).NotNullable()
+               .WithColumn("CustomerName").AsString(255).NotNullable()
+
+                .WithColumn("ProductId").AsInt32().NotNullable()
+                .ForeignKey("FK_Sells_Products", "Products", "Id");
+
 
             Create.Table("Accountings")
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
@@ -45,31 +56,17 @@ namespace ShopApp.Migrations
                 .AsDateTime().NotNullable()
                 .WithColumn("NumberOfDocument").AsInt32().NotNullable()
                 .WithColumn("NumberOfinvoiceSell").AsString(255).NotNullable()
-                .WithColumn("TotalPrice").AsDouble().NotNullable();
+                .WithColumn("TotalPrice").AsDouble().NotNullable()
 
-            Create.Table("Sells")
-                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                 .WithColumn("Count").AsInt32().NotNullable()
-                 .WithColumn("Price").AsDouble().NotNullable()
-                 .WithColumn("DateTime").AsDateTime().NotNullable()
-                 .WithColumn("NumberOfInvoice").AsString(255).NotNullable()
-                 .WithColumn("CustomerName").AsString(255).NotNullable()
+                .WithColumn("SellId").AsInt32().NotNullable()
+                  .ForeignKey("FK_Sells_Accountings", "Sells", "Id");
 
-                  .WithColumn("ProductId").AsInt32().NotNullable()
-                  .ForeignKey("FK_Sells_Products", "Products", "Id")
-
-                    .WithColumn("AccountingId").AsInt32().NotNullable()
-                  .ForeignKey("FK_Sells_Accountings", "Accountings", "Id");
-
-
-
-
-
+          
         }
         public override void Down()
         {
-            Delete.Table("Sells");
             Delete.Table("Accountings");
+            Delete.Table("Sells");
             Delete.Table("ProductArrivals");
             Delete.Table("Products");
             Delete.Table("Categories");

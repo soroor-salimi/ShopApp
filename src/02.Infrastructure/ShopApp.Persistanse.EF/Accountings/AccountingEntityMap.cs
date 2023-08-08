@@ -20,8 +20,12 @@ namespace ShopApp.Persistanse.EF.Accountings
             entity.Property(_ => _.NumberOfinvoiceSell).IsRequired();
             entity.Property(_ => _.NumberOfDocument).IsRequired();
             entity.Property(_ => _.DocumentRegistrationDate).IsRequired();
+            entity.Property(_ => _.SellId).IsRequired();
+            entity.HasOne(_ => _.Sell)
+                .WithOne()
+                .HasForeignKey<Accounting>(_=>_.SellId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-         
         }
     }
 }

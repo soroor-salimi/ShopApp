@@ -14,6 +14,6 @@ namespace ShopApp.Services.Products.Contracts.Dto
         public string Title { get; set; }
         public int MinimumInventory { get; set; }
         public int Inventory { get; set; }
-        public int StatusType { get; set; }
+        public StatusType StatusType { get; set; }
     }
 }

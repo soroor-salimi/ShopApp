@@ -15,6 +15,6 @@ namespace ShopApp.Services.Products.Contracts
         Product? FindById(int id);
         void DeletedProduct(Product product);
         void Update(Product product);
-        List<GetAllProductDto> GetAll(int? statusType);
+        List<GetAllProductDto> GetAll(searchingProductDto? dto);
     }
 }

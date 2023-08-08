@@ -37,16 +37,11 @@ namespace ShopApp.Service.Unit.Test
                 Count = 5,
                 CustomerName = "dummy_name",
                 Price = 1000,
-                ProductId=product.Id,
-                NumberOfinvoiceSell="123a"
+                ProductId = product.Id,
+                NumberOfinvoiceSell = "123a"
+
             };
-            dto.AccountinginSell = new AddedAccountingForSellDto()
-            {
-                DocumentRegistrationDate = (new DateTime(2023, 8, 3)),
-                NumberOfDocument = 1233455657,
-                NumberOfinvoiceSell = "123a",
-                TotalPrice = dto.Price * dto.Count,
-            };
+
 
             var sut = SellServicesFactories.Create(SetupContext);
             sut.AddWithAccounting(dto);
@@ -59,7 +54,7 @@ namespace ShopApp.Service.Unit.Test
             expectedProduct.CategoryId.Should().Be(product.CategoryId);
 
             var expected = ReadContext.Set<Sell>().Single();
-            expected.CustomerName.Should().Be(dto.CustomerName);            
+            expected.CustomerName.Should().Be(dto.CustomerName);
             expected.NumberOfinvoiceSell.Should().Be(dto.NumberOfinvoiceSell);
             expected.Count.Should().Be(dto.Count);
             expected.Price.Should().Be(dto.Price);
@@ -68,14 +63,11 @@ namespace ShopApp.Service.Unit.Test
 
             var expectedAccounting = ReadContext.Set<Accounting>().Single();
             expectedAccounting.NumberOfinvoiceSell.Should()
-                .Be(dto.AccountinginSell.NumberOfinvoiceSell);
-            expectedAccounting.NumberOfDocument.Should()
-                .Be(dto.AccountinginSell.NumberOfDocument);
+                .Be(expected.NumberOfinvoiceSell);
             expectedAccounting.DocumentRegistrationDate.Should()
                 .Be(new DateTime(2023, 8, 3));
             expectedAccounting.TotalPrice.Should()
-                .Be(dto.AccountinginSell.TotalPrice);
-
+                .Be(5000);
 
         }
     }
