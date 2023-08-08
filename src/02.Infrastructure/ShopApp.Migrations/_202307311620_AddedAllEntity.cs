@@ -45,7 +45,6 @@ namespace ShopApp.Migrations
                .WithColumn("DateTime").AsDateTime().NotNullable()
                .WithColumn("NumberOfInvoice").AsString(255).NotNullable()
                .WithColumn("CustomerName").AsString(255).NotNullable()
-
                 .WithColumn("ProductId").AsInt32().NotNullable()
                 .ForeignKey("FK_Sells_Products", "Products", "Id");
 

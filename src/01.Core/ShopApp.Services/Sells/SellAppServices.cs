@@ -48,7 +48,6 @@ namespace ShopApp.Services.Sells
                ProductId=dto.ProductId,
                Price=dto.Price,
                DateTime=dto.DateTime,
-               NumberOfinvoiceSell=dto.NumberOfinvoiceSell,             
             };
             var accounting = new Accounting()
             {
@@ -56,7 +55,6 @@ namespace ShopApp.Services.Sells
                 TotalPrice = sell.Price*sell.Count,
                 DocumentRegistrationDate=DateTime.UtcNow,
                 NumberOfDocument=45,
-                NumberOfinvoiceSell=sell.NumberOfinvoiceSell,               
             };
 
             _accountingrepository.Add(accounting);

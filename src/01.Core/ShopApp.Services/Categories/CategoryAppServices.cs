@@ -25,10 +25,7 @@ namespace ShopApp.Services.Categories
         public void Add(AddedCategoryDto dto)
         {
             var dublicateName = _repository.DublicateName(dto.Name);
-            if (dublicateName)
-            {
-                throw new CategoryNameIsExistException();
-            }
+            StopIfNameIsDuplicate(dublicateName);
 
             var categoryDto = new Category()
             {
@@ -37,6 +34,15 @@ namespace ShopApp.Services.Categories
             _repository.Add(categoryDto);
             _unitOfWork.Complete();
         }
+
+        private static void StopIfNameIsDuplicate(bool dublicateName)
+        {
+            if (dublicateName)
+            {
+                throw new CategoryNameIsExistException();
+            }
+        }
+
         public List<GetAllCategoryDto> GetAll()
         {
             return _repository.GetAll();

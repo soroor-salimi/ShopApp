@@ -9,7 +9,7 @@ namespace ShopApp.Services.Products.Contracts.Dto
 {
     public class searchingProductDto
     {
-        public StatusType type  { get; set; }
-        public string NameCategory { get; set; }
+        public StatusType? type  { get; set; }
+        public string? NameCategory { get; set; }
     }
 }

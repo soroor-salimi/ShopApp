@@ -31,7 +31,6 @@ namespace ShopApp.Service.Unit.Test
                 .WithStatusType(StatusType.Available)
                 .Build();
             DbContext.Save(product);
-
             var dto = new AddedSellWithAccountigDto()
             {
                 Count = 5,
@@ -53,18 +52,14 @@ namespace ShopApp.Service.Unit.Test
             expectedProduct.statusType.Should().Be(StatusType.Available);
             expectedProduct.MinimumInventory.Should().Be(product.MinimumInventory);
             expectedProduct.CategoryId.Should().Be(product.CategoryId);
-
             var expected = ReadContext.Set<Sell>().Single();
             expected.CustomerName.Should().Be(dto.CustomerName);
-            expected.NumberOfinvoiceSell.Should().Be(dto.NumberOfinvoiceSell);
             expected.Count.Should().Be(dto.Count);
             expected.Price.Should().Be(dto.Price);
            // expected.DateTime.Should().Be(new DateTime(2023, 8, 3));
 
 
             var expectedAccounting = ReadContext.Set<Accounting>().Single();
-            expectedAccounting.NumberOfinvoiceSell.Should()
-                .Be(expected.NumberOfinvoiceSell);
             //expectedAccounting.DocumentRegistrationDate.Should()
              //   .Be(new DateTime(2023, 8, 3));
             expectedAccounting.TotalPrice.Should()
