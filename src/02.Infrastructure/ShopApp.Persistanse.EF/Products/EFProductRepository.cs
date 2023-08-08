@@ -40,22 +40,23 @@ namespace ShopApp.Persistanse.EF.Products
                 CategoryId = _.CategoryId,
                 Inventory = _.Inventory,
                 MinimumInventory = _.MinimumInventory,
-                StatusType = (int) _.statusType,
+                StatusType = (int)_.statusType,
                 Title = _.Title,
             });
 
             if (statusType != null)
             {
-               
-                result = result.Where(_ => _.StatusType ==  statusType);
+
+                result = result.Where(_ => _.StatusType == statusType);
             }
 
             return result.OrderBy(t => t.Title).ToList();
         }
 
-        public bool IsDublcateTitle(string title)
+        public bool IsDublcateTitle(int categoryId, string title)
         {
-            return _products.Any(_ => _.Title == title);
+            return _products.Any(_ => _.CategoryId == categoryId 
+            && _.Title == title);
         }
 
         public void Update(Product product)

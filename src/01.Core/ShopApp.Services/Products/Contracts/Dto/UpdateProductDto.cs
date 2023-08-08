@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopApp.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace ShopApp.Services.Products.Contracts.Dto
     {
         [Required]
         public int Inventory { get; set; }
+        [Required]
+        public StatusType StatusType { get; set; }
     }
 }

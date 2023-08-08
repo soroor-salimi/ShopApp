@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using ShopApp.Entities;
-using ShopApp.Services.Products.Contracts.Dto;
-using ShopApp.TestTools.Accountings;
+using ShopApp.Services.Accountings.Contracts.Dto;
+using ShopApp.Services.Sells.Contracts.Dto;
 using ShopApp.TestTools.Categories;
 using ShopApp.TestTools.infrastructure.DataBaseConfig;
 using ShopApp.TestTools.infrastructure.DataBaseConfig.Unit;
@@ -32,60 +32,49 @@ namespace ShopApp.Service.Unit.Test
                 .Build();
             DbContext.Save(product);
 
-            var dto = new AddedSellDtoBuilder()
-              .WithCount(5)
-              .WithProductId(product.Id)
-              .WithPrice(1000)
-              .WithCustomerName("مجید رضوی")
-               
-              .Build();
-
-            var sut = SellServicesFactories.Create(SetupContext);
-            sut.Add(dto);
-
-            var totalPrice = dto.Count * dto.Price;
-
-             var dtoAccounting = new AddedAccountingDtoBuilder()
-            .WithTotalPrice(totalPrice)
-            .WithNumberOfDocument(123)
-            .WithDocumentRegistrationDate(DateTime.UtcNow)
-            .WithNumberOfinvoiceSell(dto.NumberOfinvoiceSell)
-            .Build();
-            var sutAccounting = AccountingServicesFactories.Create(SetupContext);
-            sutAccounting.Add(dtoAccounting);
-
-             var productDto = new UpdateProductDto()
+            var dto = new AddedSellWithAccountigDto()
             {
-                Inventory = product.Inventory - dto.Count,
+                Count = 5,
+                CustomerName = "dummy_name",
+                Price = 1000,
+                ProductId=product.Id,
+                NumberOfinvoiceSell="123a"
+            };
+            dto.AccountinginSell = new AddedAccountingForSellDto()
+            {
+                DocumentRegistrationDate = (new DateTime(2023, 8, 3)),
+                NumberOfDocument = 1233455657,
+                NumberOfinvoiceSell = "123a",
+                TotalPrice = dto.Price * dto.Count,
             };
 
-            var productSut = ProductServicesFactories.Create(SetupContext);
-            productSut.Update(dto.ProductId, productDto);
-
-
+            var sut = SellServicesFactories.Create(SetupContext);
+            sut.AddWithAccounting(dto);
 
             var expectedProduct = ReadContext.Set<Product>().Single();
-            expectedProduct.Title.Should().Be("لنت ترمز");
-            expectedProduct.Inventory.Should().Be(15);
-            expectedProduct.statusType.Should().Be(product.statusType);
-            expectedProduct.MinimumInventory.Should().Be(5);
+            expectedProduct.Id.Should().Be(product.Id);
+            expectedProduct.Inventory.Should().Be(product.Inventory);
+            expectedProduct.statusType.Should().Be(StatusType.unAvailable);
+            expectedProduct.MinimumInventory.Should().Be(product.MinimumInventory);
             expectedProduct.CategoryId.Should().Be(product.CategoryId);
 
             var expected = ReadContext.Set<Sell>().Single();
-            expected.Product.Title.Should().Be("لنت ترمز");
-            expected.CustomerName.Should().Be("مجید رضوی");
-            expected.NumberOfinvoiceSell.Should().Be("123a");
-            expected.Count.Should().Be(5);
-            expected.Price.Should().Be(1000);
+            expected.CustomerName.Should().Be(dto.CustomerName);            
+            expected.NumberOfinvoiceSell.Should().Be(dto.NumberOfinvoiceSell);
+            expected.Count.Should().Be(dto.Count);
+            expected.Price.Should().Be(dto.Price);
             expected.DateTime.Should().Be(new DateTime(2023, 8, 3));
-            //var expectAccounting = expected.dtoAccounting.Single();
-            // expected.ProductId.Should().Be(_product.Id);
+
 
             var expectedAccounting = ReadContext.Set<Accounting>().Single();
-            expectedAccounting.NumberOfinvoiceSell.Should().Be("123a");
-            expectedAccounting.NumberOfDocument.Should().Be(1233455657);
-            expectedAccounting.DocumentRegistrationDate.Should().Be(new DateTime(2023, 8, 3));
-            expectedAccounting.TotalPrice.Should().Be(5000);
+            expectedAccounting.NumberOfinvoiceSell.Should()
+                .Be(dto.AccountinginSell.NumberOfinvoiceSell);
+            expectedAccounting.NumberOfDocument.Should()
+                .Be(dto.AccountinginSell.NumberOfDocument);
+            expectedAccounting.DocumentRegistrationDate.Should()
+                .Be(new DateTime(2023, 8, 3));
+            expectedAccounting.TotalPrice.Should()
+                .Be(dto.AccountinginSell.TotalPrice);
 
 
         }

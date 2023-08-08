@@ -18,8 +18,7 @@ namespace ShopApp.TestTools.ProductArrivals
             {
                 NameCompany = "فپکو",
                 ProductId = 0,
-                Count = 0,
-                StatusType = StatusType.Available,
+                Count = 0,             
                 NumberOfInvoice = "123a",
                 DateTime = DateTime.UtcNow,
 
@@ -48,11 +47,7 @@ namespace ShopApp.TestTools.ProductArrivals
             _productArrival.NumberOfInvoice = numberOfInvoice;
             return this;
         } 
-        public AddedProductArrivalDtoBuilder WithStatusType(StatusType statusType)
-        {
-            _productArrival.StatusType = statusType;
-            return this;
-        }  public AddedProductArrivalDtoBuilder WithDateTime(DateTime dateTime)
+      public AddedProductArrivalDtoBuilder WithDateTime(DateTime dateTime)
         {
             _productArrival.DateTime = dateTime;
             return this;

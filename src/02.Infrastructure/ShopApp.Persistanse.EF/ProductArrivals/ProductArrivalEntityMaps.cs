@@ -20,7 +20,6 @@ namespace ShopApp.Persistanse.EF.ProductArrivals
             entity.Property(_ => _.Count).IsRequired();
             entity.Property(_ => _.NumberOfInvoice).IsRequired();
             entity.Property(_ => _.NameCompany).IsRequired().HasMaxLength(255);
-            entity.Property(_ => _.StatusType).IsRequired();
 
             entity.Property(_ => _.ProductId).IsRequired();
             entity.HasOne(_ => _.Product)

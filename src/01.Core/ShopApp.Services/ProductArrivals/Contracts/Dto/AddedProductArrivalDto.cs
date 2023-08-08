@@ -21,7 +21,5 @@ namespace ShopApp.Services.ProductArrivals.Contracts.Dto
         [Required]
         [MaxLength(255)]
         public string NameCompany { get; set; }
-        [Required]
-        public StatusType StatusType { get; set; }
     }
 }

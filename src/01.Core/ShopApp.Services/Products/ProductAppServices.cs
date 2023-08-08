@@ -22,7 +22,7 @@ namespace ShopApp.Services.Products
             , UnitOfWork unitOfWork)
         {
             _repository = repository;
-            _categoryRepository= categoryRepository;
+            _categoryRepository = categoryRepository;
             _unitOfWork = unitOfWork;
         }
         public void Add(AddProductDto dto)
@@ -33,7 +33,8 @@ namespace ShopApp.Services.Products
                 throw new CategoryIdIsNotFoundException();
             }
 
-            var isDublicateTitle = _repository.IsDublcateTitle(dto.Title);
+            var isDublicateTitle = 
+                _repository.IsDublcateTitle(category.Id,dto.Title);
             if (isDublicateTitle)
             {
                 throw new TheTitleOfTheProductIsDublicatedEception();
@@ -45,7 +46,7 @@ namespace ShopApp.Services.Products
                 CategoryId = dto.CategoryId,
                 Inventory = dto.Inventory,
                 MinimumInventory = dto.MinimumInventory,
-                statusType=dto.StatusType,
+                statusType = StatusType.unAvailable,
             };
             _repository.Add(product);
             _unitOfWork.Complete();
@@ -63,19 +64,27 @@ namespace ShopApp.Services.Products
             _unitOfWork.Complete();
         }
 
-        public List< GetAllProductDto> GetAll(int? statusType)
+        public List<GetAllProductDto> GetAll(int? statusType)
         {
-           return _repository.GetAll(statusType);
+            return _repository.GetAll(statusType);
         }
 
         public void Update(int productId, UpdateProductDto productDto)
         {
-            var product=_repository.FindById(productId);
-            if (product==null)
+            var product = _repository.FindById(productId);
+            if (product == null)
             {
                 throw new ProductIsNotFoundException();
             }
-            product.Inventory=productDto.Inventory;
+            product.Inventory = product.Inventory + productDto.Inventory;
+            if (product.Inventory <= product.MinimumInventory)
+            {
+                product.statusType = StatusType.ReadyToOrder;
+            }
+            else
+            {
+                product.statusType = StatusType.Available;
+            }
             _repository.Update(product);
             _unitOfWork.Complete();
         }

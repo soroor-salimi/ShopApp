@@ -14,21 +14,22 @@ namespace ShopApp.Services.Accountings
     {
         private AccountingRepository _repository;
         private UnitOfWork _unitOfWork;
-        public AccountingAppServices(AccountingRepository repository
-            , UnitOfWork unitOfWork)
+        public AccountingAppServices(
+            AccountingRepository repository,
+             UnitOfWork unitOfWork)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
         }
 
-        public void Add(AddedAccountingDto dtoAccounting)
+        public void Add(AddedAccountingForSellDto dtoAccounting)
         {
-            var accounting=new Accounting()
+            var accounting = new Accounting()
             {
-                TotalPrice=dtoAccounting.TotalPrice,
-                NumberOfDocument=dtoAccounting.NumberOfDocument,
-                DocumentRegistrationDate=dtoAccounting.DocumentRegistrationDate,
-                NumberOfinvoiceSell=dtoAccounting.NumberOfinvoiceSell,
+                NumberOfDocument = dtoAccounting.NumberOfDocument,
+                DocumentRegistrationDate = DateTime.Today,
+                NumberOfinvoiceSell = dtoAccounting.NumberOfinvoiceSell,
+                TotalPrice = dtoAccounting.TotalPrice,
             };
             _repository.Add(accounting);
             _unitOfWork.Complete();

@@ -19,7 +19,7 @@ namespace ShopApp.RestApi
         {
             _services.Add(dto);
         }
-        [HttpGet("for_admin")]
+        [HttpGet()]
         public void Get([FromQuery]int? statusType)
         {
             _services.GetAll(statusType);

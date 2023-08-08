@@ -15,7 +15,6 @@ namespace ShopApp.Entities
         public int Count { get; set; }
         public string NumberOfInvoice { get; set; }
         public string NameCompany { get; set; }
-        public StatusType StatusType { get; set; }
 
         public Product Product { get; set; }
     }

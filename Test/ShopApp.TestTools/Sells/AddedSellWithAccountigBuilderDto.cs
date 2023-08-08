@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace ShopApp.TestTools.Sells
 {
-    public class AddedSellDtoBuilder
+    public class AddedSellWithAccountigBuilderDto
     {
-        private AddedSellDto _sell;
-        public AddedSellDtoBuilder()
+        private AddedSellWithAccountigDto _sell;
+        public AddedSellWithAccountigBuilderDto()
         {
-            _sell = new AddedSellDto()
+            _sell = new AddedSellWithAccountigDto()
             {
                 AccountingId = 0,
                 Count = 0,
@@ -23,53 +23,52 @@ namespace ShopApp.TestTools.Sells
                 NumberOfinvoiceSell = "123",
                 Price = 0,
                 ProductName="لنت ترمز",
-                //AccountinginSell=
             };
         }
 
-        public AddedSellDtoBuilder WithAccountingId(int accountinId)
+        public AddedSellWithAccountigBuilderDto WithAccountingId(int accountinId)
         {
             _sell.AccountingId = accountinId;
             return this;
         }
-        public AddedSellDtoBuilder WithProductId(int productId)
+        public AddedSellWithAccountigBuilderDto WithProductId(int productId)
         {
             _sell.ProductId = productId;
             return this;
         }
-        public AddedSellDtoBuilder WithCount(int count)
+        public AddedSellWithAccountigBuilderDto WithCount(int count)
         {
             _sell.Count = count;
             return this;
         }
 
-        public AddedSellDtoBuilder WithCustomerName(string customerName)
+        public AddedSellWithAccountigBuilderDto WithCustomerName(string customerName)
         {
             _sell.CustomerName = customerName;
             return this;
         }
       
-        public AddedSellDtoBuilder WithDateTime(DateTime dateTime)
+        public AddedSellWithAccountigBuilderDto WithDateTime(DateTime dateTime)
         {
             _sell.DateTime = dateTime;
             return this;
         } 
-        public AddedSellDtoBuilder WithNumberOfinvoiceSell(string numberOfInvoiceSell)
+        public AddedSellWithAccountigBuilderDto WithNumberOfinvoiceSell(string numberOfInvoiceSell)
         {
             _sell.NumberOfinvoiceSell = numberOfInvoiceSell;
             return this;
         }
-        public AddedSellDtoBuilder WithProductName(string title)
+        public AddedSellWithAccountigBuilderDto WithProductName(string title)
         {
             _sell.ProductName = title;
             return this;
         }
-        public AddedSellDtoBuilder WithPrice(double price)
+        public AddedSellWithAccountigBuilderDto WithPrice(double price)
         {
             _sell.Price = price;
             return this;
         }
-        public AddedSellDto Build()
+        public AddedSellWithAccountigDto Build()
         {
             return _sell;
         }

@@ -9,6 +9,6 @@ namespace ShopApp.Services.Sells.Contracts
 {
     public interface SellServices
     {
-        void Add(AddedSellDto dto);
+        void AddWithAccounting(AddedSellWithAccountigDto dto);
     }
 }

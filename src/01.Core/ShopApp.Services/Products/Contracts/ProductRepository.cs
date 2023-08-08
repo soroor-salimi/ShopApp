@@ -11,7 +11,7 @@ namespace ShopApp.Services.Products.Contracts
     public interface ProductRepository
     {
         void Add(Product product);
-        bool IsDublcateTitle(string title);
+        bool IsDublcateTitle(int categoryId,string title);
         Product? FindById(int id);
         void DeletedProduct(Product product);
         void Update(Product product);

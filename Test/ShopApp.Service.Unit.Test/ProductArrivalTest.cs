@@ -17,11 +17,8 @@ namespace ShopApp.Service.Unit.Test
 {
     public class ProductArrivalTest : BusinessUnitTest
     {
-        [Theory]
-        [InlineData(StatusType.Available)]
-        [InlineData(StatusType.ReadyToOrder)]
-        [InlineData(StatusType.unAvailable)]
-        public void Added_add_productArrical_peroperly(StatusType type)
+        [Fact]
+        public void Added_add_productArrival_when_statusType_is_avalable_peroperly()
         {
             var category = CategoryFactory.Generate("بهداشتی");
             DbContext.Save(category);
@@ -30,7 +27,7 @@ namespace ShopApp.Service.Unit.Test
                .WithMinimumInventory(10)
                .WithCategoryId(category.Id)
                .WithTitle("شامپو")
-               .WithStatusType(type)
+               .WithStatusType(StatusType.unAvailable)
                .Build();
             DbContext.Save(product);
 
@@ -46,13 +43,6 @@ namespace ShopApp.Service.Unit.Test
             var sut = ProductArrivalServicesFactories.Create(SetupContext);
             sut.Add(dto);
 
-            var productDto = new UpdateProductDto()
-            {
-                Inventory = product.Inventory + dto.Count,
-            };
-
-            var productSut = ProductServicesFactories.Create(SetupContext);
-            productSut.Update(dto.ProductId,productDto);
 
             var expect = ReadContext.Set<ProductArrival>().Single();
             expect.NameCompany.Should().Be(dto.NameCompany);
@@ -62,9 +52,97 @@ namespace ShopApp.Service.Unit.Test
             expect.DateTime.Should().Be(new DateTime(2023,7,3));
 
             var expectProduct = ReadContext.Set<Product>().Single();
-            expectProduct.Inventory.Should().Be(productDto.Inventory);
+            expectProduct.Inventory.Should().
+                Be(product.Inventory+dto.Count);
             expectProduct.Title.Should().Be(product.Title);
-            expectProduct.statusType.Should().Be(product.statusType);
+            expectProduct.statusType.Should().Be(StatusType.Available);
+            expectProduct.CategoryId.Should().Be(product.CategoryId);
+            expectProduct.MinimumInventory.Should().Be(product.MinimumInventory);
+
+        }
+        [Fact]
+        public void Added_add_productArrival_when_statusType_is_ready_to_order_peroperly()
+        {
+            var category = CategoryFactory.Generate("بهداشتی");
+            DbContext.Save(category);
+            var product = new ProductBuilder()
+               .WithInventory(0)
+               .WithMinimumInventory(10)
+               .WithCategoryId(category.Id)
+               .WithTitle("شامپو")
+               .WithStatusType(StatusType.unAvailable)
+               .Build();
+            DbContext.Save(product);
+
+            var dto = new AddedProductArrivalDtoBuilder()
+                .WithProductId(product.Id)
+                .WithNumberOfInvoice("123a")
+                .WithCount(10)
+                .WithNameCompany("فپکو")
+                .WithDateTime(new DateTime(2023, 7, 3))
+                .Build();
+
+
+            var sut = ProductArrivalServicesFactories.Create(SetupContext);
+            sut.Add(dto);
+
+
+            var expect = ReadContext.Set<ProductArrival>().Single();
+            expect.NameCompany.Should().Be(dto.NameCompany);
+            expect.NumberOfInvoice.Should().Be(dto.NumberOfInvoice);
+            expect.Count.Should().Be(dto.Count);
+            expect.ProductId.Should().Be(product.Id);
+            expect.DateTime.Should().Be(new DateTime(2023, 7, 3));
+
+            var expectProduct = ReadContext.Set<Product>().Single();
+            expectProduct.Inventory.Should().
+                Be(product.Inventory + dto.Count);
+            expectProduct.Title.Should().Be(product.Title);
+            expectProduct.statusType.Should().Be(StatusType.ReadyToOrder);
+            expectProduct.CategoryId.Should().Be(product.CategoryId);
+            expectProduct.MinimumInventory.Should().Be(product.MinimumInventory);
+
+        }
+        [Fact]
+        public void 
+       Added_add_productArrival_when_inventory_smaller_than_minInventory_peroperly()
+        {
+            var category = CategoryFactory.Generate("بهداشتی");
+            DbContext.Save(category);
+            var product = new ProductBuilder()
+               .WithInventory(0)
+               .WithMinimumInventory(10)
+               .WithCategoryId(category.Id)
+               .WithTitle("شامپو")
+               .WithStatusType(StatusType.unAvailable)
+               .Build();
+            DbContext.Save(product);
+
+            var dto = new AddedProductArrivalDtoBuilder()
+                .WithProductId(product.Id)
+                .WithNumberOfInvoice("123a")
+                .WithCount(5)
+                .WithNameCompany("فپکو")
+                .WithDateTime(new DateTime(2023, 7, 3))
+                .Build();
+
+
+            var sut = ProductArrivalServicesFactories.Create(SetupContext);
+            sut.Add(dto);
+
+
+            var expect = ReadContext.Set<ProductArrival>().Single();
+            expect.NameCompany.Should().Be(dto.NameCompany);
+            expect.NumberOfInvoice.Should().Be(dto.NumberOfInvoice);
+            expect.Count.Should().Be(dto.Count);
+            expect.ProductId.Should().Be(product.Id);
+            expect.DateTime.Should().Be(new DateTime(2023, 7, 3));
+
+            var expectProduct = ReadContext.Set<Product>().Single();
+            expectProduct.Inventory.Should().
+                Be(product.Inventory + dto.Count);
+            expectProduct.Title.Should().Be(product.Title);
+            expectProduct.statusType.Should().Be(StatusType.ReadyToOrder);
             expectProduct.CategoryId.Should().Be(product.CategoryId);
             expectProduct.MinimumInventory.Should().Be(product.MinimumInventory);
 

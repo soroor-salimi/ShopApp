@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.Services.Sells.Contracts.Dto
 {
-    public class AddedSellDto
+    public class AddedSellWithAccountigDto
     {
         [Required]
         public int ProductId { get; set; }
@@ -30,6 +30,6 @@ namespace ShopApp.Services.Sells.Contracts.Dto
         public int Count { get; set; }
         [Required]
         public double Price { get; set; }
-        public AddedAccountingDto AccountinginSell { get; set; }
+        public AddedAccountingForSellDto AccountinginSell { get; set; }
     }
 }

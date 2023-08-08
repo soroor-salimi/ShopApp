@@ -2,10 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using ShopApp.Persistanse.EF;
 using ShopApp.Persistanse.EF.Categories;
+using ShopApp.Persistanse.EF.ProductArrivals;
 using ShopApp.Persistanse.EF.Products;
 using ShopApp.Services.Categories;
 using ShopApp.Services.Categories.Contracts;
 using ShopApp.Services.Contracts;
+using ShopApp.Services.ProductArrivals;
+using ShopApp.Services.ProductArrivals.Contracts;
 using ShopApp.Services.Products;
 using ShopApp.Services.Products.Contracts;
 
@@ -25,6 +28,9 @@ builder.Services.AddScoped<CaregoryServices, CategoryAppServices>();
 
 builder.Services.AddScoped<ProductRepository, EFProductRepository>();
 builder.Services.AddScoped<ProductServices, ProductAppServices>();
+
+builder.Services.AddScoped<ProductArrivalRepository, EFProductArrivalRepository>();
+builder.Services.AddScoped<ProductArrivalServices, ProductArrivalAppServices>();
 
 
 builder.Services.AddDbContext<EFDataContext>(options =>

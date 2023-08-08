@@ -35,7 +35,6 @@ namespace ShopApp.Services.ProductArrivals
                 DateTime = dto.DateTime,
                 NumberOfInvoice = dto.NumberOfInvoice,
                 ProductId = dto.ProductId,
-                StatusType = dto.StatusType
             };
 
             _repository.Add(productArrival);
@@ -44,11 +43,9 @@ namespace ShopApp.Services.ProductArrivals
             if (product == null)
             {
                 throw new ProductIsNotFoundException();
-            }
+            }   
 
             product.Inventory = product.Inventory + dto.Count;
-
-         
             if (product.Inventory <= product.MinimumInventory)
             {
                 product.statusType = StatusType.ReadyToOrder;
@@ -57,6 +54,7 @@ namespace ShopApp.Services.ProductArrivals
             {
                 product.statusType = StatusType.Available;
             }
+
             _productRepository.Update(product);
             _unitOfWork.Complete();
 

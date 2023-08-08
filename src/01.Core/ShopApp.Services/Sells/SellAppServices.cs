@@ -1,5 +1,6 @@
 ﻿using ShopApp.Entities;
 using ShopApp.Services.Accountings.Contracts;
+using ShopApp.Services.Accountings.Contracts.Dto;
 using ShopApp.Services.Accountings.Contracts.Exceptions;
 using ShopApp.Services.Contracts;
 using ShopApp.Services.ProductArrivals.Exceptions;
@@ -32,8 +33,19 @@ namespace ShopApp.Services.Sells
             _productRepository = productRepository;
         }
 
-        public void Add(AddedSellDto dto)
+        public void AddWithAccounting(AddedSellWithAccountigDto dto)
         {
+            var product = _productRepository.FindById(dto.ProductId);
+            if (product == null)
+            {
+                throw new ProductIsNotFoundException();
+            }
+            var accountingF = _accountingrepository.FindById(dto.AccountingId);
+            if (accountingF == null)
+            {
+                throw new AccountingIsNotFoundException();
+            }
+
             var sell = new Sell()
             {
                Count=dto.Count,
@@ -42,26 +54,17 @@ namespace ShopApp.Services.Sells
                ProductId=dto.ProductId,
                Price=dto.Price,
                DateTime=dto.DateTime,
-               NumberOfinvoiceSell=dto.NumberOfinvoiceSell,
-              // Accounting = dto.AccountinginSell.Find,
+               NumberOfinvoiceSell=dto.NumberOfinvoiceSell,             
             };
-            _repository.Add(sell);
-
             var accounting = new Accounting()
             {
-              TotalPrice= dto.Count * dto.Price,             
-              DocumentRegistrationDate = DateTime.UtcNow,
-              NumberOfinvoiceSell = dto.NumberOfinvoiceSell,
-              
+                TotalPrice = dto.Count * dto.Price,
+                DocumentRegistrationDate = DateTime.UtcNow,
+                NumberOfinvoiceSell = dto.NumberOfinvoiceSell,
+                NumberOfDocument=dto.AccountinginSell.NumberOfDocument
             };
-            _accountingrepository.Add(accounting);
-
-            var product = _productRepository.FindById(dto.ProductId);
-            if (product == null)
-            {
-                throw new ProductIsNotFoundException();
-            }
-
+            _repository.Add(sell);
+          
             product.Inventory = product.Inventory - dto.Count;
 
 

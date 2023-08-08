@@ -34,7 +34,6 @@ namespace ShopApp.Migrations
               .WithColumn("DateTime").AsDateTime().NotNullable()
               .WithColumn("NumberOfinvoice").AsString(255).NotNullable()
               .WithColumn("NameCompany").AsString(255).NotNullable()
-              .WithColumn("StatusType").AsInt32().NotNullable()
 
                .WithColumn("ProductId").AsInt32().NotNullable()
          .ForeignKey("Fk_Products_ProductArrivals", "Products", "Id");
@@ -42,7 +41,8 @@ namespace ShopApp.Migrations
 
             Create.Table("Accountings")
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("DocumentRegistrationDate").AsDateTime().NotNullable()
+                .WithColumn("DocumentRegistrationDate")
+                .AsDateTime().NotNullable()
                 .WithColumn("NumberOfDocument").AsInt32().NotNullable()
                 .WithColumn("NumberOfinvoiceSell").AsString(255).NotNullable()
                 .WithColumn("TotalPrice").AsDouble().NotNullable();

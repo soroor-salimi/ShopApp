@@ -10,6 +10,6 @@ namespace ShopApp.Services.Accountings.Contracts
 {
     public interface AccountingServices
     {
-        void Add(AddedAccountingDto dtoAccounting);
+        void Add(AddedAccountingForSellDto dtoAccounting);
     }
 }

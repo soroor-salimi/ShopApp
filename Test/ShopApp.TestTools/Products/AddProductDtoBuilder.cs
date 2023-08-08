@@ -16,7 +16,7 @@ namespace ShopApp.TestTools.Products
                 Title = "شیر",
                 CategoryId = 0,
                 Inventory = 0,
-                MinimumInventory = 20,
+                MinimumInventory = 10,
                 StatusType = StatusType.Available,
             };
 

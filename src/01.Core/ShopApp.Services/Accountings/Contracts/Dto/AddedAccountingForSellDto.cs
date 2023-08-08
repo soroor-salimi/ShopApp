@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.Services.Accountings.Contracts.Dto
 {
-    public class AddedAccountingDto
+    public class AddedAccountingForSellDto
     {
         [Required]
         public DateTime DocumentRegistrationDate { get; set; }
@@ -18,5 +18,7 @@ namespace ShopApp.Services.Accountings.Contracts.Dto
         public string NumberOfinvoiceSell { get; set; }
         [Required]
         public double TotalPrice { get; set; }
+
+      
     }
 }
