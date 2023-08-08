@@ -33,7 +33,7 @@ namespace ShopApp.Services.Sells
             _productRepository = productRepository;
         }
 
-        public void AddWithAccounting(AddedSellWithAccountigDto dto)
+        public void AddSellWithAccounting(AddedSellWithAccountigDto dto)
         {
             var product = _productRepository.FindById(dto.ProductId);
             if (product == null)

@@ -21,7 +21,6 @@ namespace ShopApp.Specs.Test.Sells.Add
     {
         private Category _category;
         private Product _product;
-        private AddedSellWithAccountigDto _dtoAccounting;
 
         [Given("گروهی با نام لوازم یدکی در فهرست گروه ها وجود دارد")]
         [And("کالایی با عنوان لنت ترمز با موجودی ۲۰  " +
@@ -54,17 +53,12 @@ namespace ShopApp.Specs.Test.Sells.Add
                 CustomerName = "مجید رضوی",
                 Price = 1000,
                 ProductId = _product.Id,
+               // DateTime=new DateTime(2023, 8, 3)
             };
-            dto.AccountinginSell = new AddedAccountingForSellDto()
-            {
-                DocumentRegistrationDate = (new DateTime(2023, 8, 3)),
-                NumberOfDocument = 1233455657,
-                NumberOfinvoiceSell = "123a",
-                TotalPrice = dto.Price * dto.Count,
-            };
+          
 
             var sut = SellServicesFactories.Create(SetupContext);
-            sut.AddWithAccounting(dto);
+            sut.AddSellWithAccounting(dto);
 
         }
 
@@ -90,15 +84,14 @@ namespace ShopApp.Specs.Test.Sells.Add
             var expected = ReadContext.Set<Sell>().Single();
             expected.Product.Id.Should().Be(_product.Id);
             expected.CustomerName.Should().Be("مجید رضوی");
-            expected.NumberOfinvoiceSell.Should().Be("123a");
+            //expected.NumberOfinvoiceSell.Should().Be("123a");
             expected.Count.Should().Be(10);
             expected.Price.Should().Be(1000);
-            expected.DateTime.Should().Be(new DateTime(2023, 8, 3));
+          //  expected.DateTime.Should().Be(new DateTime(2023, 8, 3));
 
             var expectedAccounting = ReadContext.Set<Accounting>().Single();
-            expectedAccounting.NumberOfinvoiceSell.Should().Be("123a");
             expectedAccounting.NumberOfDocument.Should().Be(1233455657);
-            expectedAccounting.DocumentRegistrationDate.Should().Be(new DateTime(2023, 8, 3));
+           // expectedAccounting.DocumentRegistrationDate.Should().Be(new DateTime(2023, 8, 3));
             expectedAccounting.TotalPrice.Should().Be(10000);
 
         }

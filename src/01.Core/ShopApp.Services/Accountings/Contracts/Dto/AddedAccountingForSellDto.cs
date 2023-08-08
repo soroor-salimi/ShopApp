@@ -17,6 +17,7 @@ namespace ShopApp.Services.Accountings.Contracts.Dto
         [MaxLength(255)]
         public string NumberOfinvoiceSell { get; set; }
         [Required]
+        [Range(1,int.MaxValue)]
         public double TotalPrice { get; set; }
 
       

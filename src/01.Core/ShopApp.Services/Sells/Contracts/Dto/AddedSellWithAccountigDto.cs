@@ -27,6 +27,7 @@ namespace ShopApp.Services.Sells.Contracts.Dto
         [Required]
         public int Count { get; set; }
         [Required]
+        [Range(1,int.MaxValue)]
         public double Price { get; set; }
     }
 }

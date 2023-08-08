@@ -16,7 +16,7 @@ namespace ShopApp.RestApi
         [HttpPost]
         public void Add([FromBody]AddedSellWithAccountigDto dto)
         {
-            _services.AddWithAccounting(dto);
+            _services.AddSellWithAccounting(dto);
         }
     }
 }

@@ -35,8 +35,8 @@ builder.Services.AddScoped<ProductServices, ProductAppServices>();
 builder.Services.AddScoped<ProductArrivalRepository, EFProductArrivalRepository>();
 builder.Services.AddScoped<ProductArrivalServices, ProductArrivalAppServices>();
 
-builder.Services.AddScoped<SellRepository, EFSellRepository>();
-builder.Services.AddScoped<SellServices, SellAppServices>();
+//builder.Services.AddScoped<SellRepository, EFSellRepository>();
+//builder.Services.AddScoped<SellServices, SellAppServices>();
 
 
 builder.Services.AddDbContext<EFDataContext>(options =>
