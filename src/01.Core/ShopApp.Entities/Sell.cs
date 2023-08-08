@@ -11,6 +11,7 @@ namespace ShopApp.Entities
         public int Id { get; set; }
         public int ProductId { get; set; }
 
+        public string NumberOfInvoiceSell { get; set; }
         public string CustomerName { get; set; }
         public DateTime DateTime { get; set; }
         public int Count { get; set; }

@@ -18,6 +18,7 @@ namespace ShopApp.Persistanse.EF.Sells
             entity.Property(_ => _.Id).ValueGeneratedOnAdd();
             entity.Property(_=>_.Price).IsRequired();
             entity.Property(_=>_.CustomerName).IsRequired();
+            entity.Property(_=>_.NumberOfInvoiceSell).IsRequired();
             entity.Property(_=>_.DateTime).IsRequired();
             entity.Property(_=>_.Count).IsRequired();
 

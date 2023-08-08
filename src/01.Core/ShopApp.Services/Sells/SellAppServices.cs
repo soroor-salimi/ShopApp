@@ -40,26 +40,28 @@ namespace ShopApp.Services.Sells
             {
                 throw new ProductIsNotFoundException();
             }
-         
+
             var sell = new Sell()
             {
-               Count=dto.Count,
-               CustomerName=dto.CustomerName,
-               ProductId=dto.ProductId,
-               Price=dto.Price,
-               DateTime=dto.DateTime,
+                Count = dto.Count,
+                CustomerName = dto.CustomerName,
+                ProductId = dto.ProductId,
+                Price = dto.Price,
+                DateTime = dto.DateTime,
+                NumberOfInvoiceSell = dto.NumberOfinvoiceSell
             };
             var accounting = new Accounting()
             {
-                Sell=sell,
-                TotalPrice = sell.Price*sell.Count,
-                DocumentRegistrationDate=DateTime.UtcNow,
-                NumberOfDocument=45,
+                Sell = sell,
+                TotalPrice = sell.Price * sell.Count,
+                DocumentRegistrationDate = DateTime.UtcNow,
+                NumberOfDocument = 45,
+                NumberOfinvoiceSell = dto.NumberOfinvoiceSell,
             };
 
             _accountingrepository.Add(accounting);
-           
-          
+
+
             product.Inventory = product.Inventory - dto.Count;
 
 

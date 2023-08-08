@@ -43,7 +43,7 @@ namespace ShopApp.Migrations
                .WithColumn("Count").AsInt32().NotNullable()
                .WithColumn("Price").AsDouble().NotNullable()
                .WithColumn("DateTime").AsDateTime().NotNullable()
-               .WithColumn("NumberOfInvoice").AsString(255).NotNullable()
+               .WithColumn("NumberOfInvoiceSell").AsString(255).NotNullable()
                .WithColumn("CustomerName").AsString(255).NotNullable()
                 .WithColumn("ProductId").AsInt32().NotNullable()
                 .ForeignKey("FK_Sells_Products", "Products", "Id");
